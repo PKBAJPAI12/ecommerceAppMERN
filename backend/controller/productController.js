@@ -9,11 +9,15 @@ exports.createProduct = catchAsyncError(async (req, res) => {
 });
 
 exports.getAllProducts = catchAsyncError(async (req, res) => {
-const apiFeature=new ApiFeatures(Product.find(),req.query).search().filter();
+const showPerPage=5;
+const productCount=await Product.countDocuments();
+const apiFeature=new ApiFeatures(Product.find(),req.query).search().filter().pagination(showPerPage);
  const products=await apiFeature.query;
   res.status(200).json(
     { success:true,
-   products, });
+   products,
+   productCount,
+   });
 });
 exports.getProductDetails=catchAsyncError(async(req,res,next)=>{
   console.log("get");

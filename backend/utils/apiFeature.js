@@ -33,5 +33,11 @@ search() {
 
     return this;
   }
+  pagination(showPerPage){
+  const currentPage=Number(this.queryStr.page)|| 1;
+  const skip=(currentPage-1)*showPerPage;
+  this.query=this.query.limit(showPerPage).skip(skip);
+  return this;
+  }
 }
 module.exports=ApiFeatures
