@@ -22,7 +22,6 @@ const apiFeature=new ApiFeatures(Product.find(),req.query).search().filter().pag
 exports.getProductDetails=catchAsyncError(async(req,res,next)=>{
   console.log("get");
   const productDetail=await Product.findById(req.params.id);
-  console.log(productDetail);
   if (!productDetail) {
     console.log("run");
     return next(new ErrorHandler("Product Detail not found",403));
