@@ -3,6 +3,7 @@ const catchAsyncError=require("../middleware/catchAsyncError");
 const User = require("../models/userModal");
 const sendToken=require("../utils/jwtToken");
 const sendEmail=require('../utils/sendEmail.js');
+const crypto=require("crypto");
 exports.registerUser=catchAsyncError(async(req,res,next)=>{
     const {name,email,password}=req.body;
     console.log(name);
@@ -47,10 +48,14 @@ exports.forgotPassword=catchAsyncError(async(req,res,next)=>{
         return next(new ErrorHandler("User not found",404));
     }
     const resetToken=user.getResetPasswordToken();
+    console.log(resetToken);
     await user.save({validateBeforeSave:false});
+    //console.log(user);
     const resetPasswordUrl=`${req.protocol}://${req.get("host")}/api/v1/password/reset/${resetToken}`;
+    console.log(resetPasswordUrl);
     const message=`Your Password Reset Token is: -\n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it`;
-   try{
+    console.log(message);
+    try{
    await sendEmail({
      email:user.email,
      subject:`Ecommerec Password Recovery`,
@@ -61,9 +66,43 @@ exports.forgotPassword=catchAsyncError(async(req,res,next)=>{
     message:`Email sent to ${user.email} successfully`,
    })
    }catch(error){
+    console.log("catch");
     user.resetPasswordToken=undefined;
     user.resetPasswordExpire=undefined;
     await user.save({validateBeforeSave:false});
     return next(new ErrorHandler(error.message,500));
    }
+})
+exports.resetPassword=catchAsyncError(async(req,res,next)=>{
+    // creating token hash
+  const resetPasswordToken = crypto
+  .createHash("sha256")
+  .update(req.params.token)
+  .digest("hex");
+
+const user = await User.findOne({
+  resetPasswordToken,
+  resetPasswordExpire: { $gt: Date.now() },
+});
+
+if (!user) {
+  return next(
+    new ErrorHandler(
+      "Reset Password Token is invalid or has been expired",
+      400
+    )
+  );
+}
+
+if (req.body.password !== req.body.confirmPassword) {
+  return next(new ErrorHandler("Password does not password", 400));
+}
+
+user.password = req.body.password;
+user.resetPasswordToken = undefined;
+user.resetPasswordExpire = undefined;
+
+await user.save();
+
+sendToken(user, 200, res);
 })
