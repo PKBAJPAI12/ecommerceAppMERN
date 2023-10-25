@@ -10,6 +10,9 @@ const {
   updatePassword,
   updateProfile,
   getAllUsers,
+  getSingleUser,
+  updateUserRole,
+  deleteUser,
 } = require("../controller/userController");
 const { isAuthenticatedUser, authorisedRole} = require("../middleware/auth");
 //router.get('/products',getAllProducts);
@@ -23,6 +26,11 @@ router.put("/password/update", isAuthenticatedUser, updatePassword);
 router.put("/profile/update", isAuthenticatedUser, updateProfile);
 //admin 
 router.get("/admin/allUsers", isAuthenticatedUser,authorisedRole("admin"),getAllUsers);
+router
+  .route("/admin/user/:id")
+  .get(isAuthenticatedUser, authorisedRole("admin"), getSingleUser)
+  .put(isAuthenticatedUser, authorisedRole("admin"), updateUserRole)
+  .delete(isAuthenticatedUser, authorisedRole("admin"), deleteUser);
 //router.put('/product/:i  d',updateProduct);
 //router.delete('/product/:id',deleteProduct);
 //router.get('/product/:id',getProductDetails);
