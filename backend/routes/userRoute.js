@@ -21,9 +21,9 @@ router.post("/loginUser", loginUser);
 router.post("/password/forgot", forgotPassword);
 router.put("/password/reset/:token", resetPassword);
 router.get("/logout", logoutUser);
-router.get("/profile", isAuthenticatedUser, getUserDetails);
+router.get("/me", isAuthenticatedUser, getUserDetails);
 router.put("/password/update", isAuthenticatedUser, updatePassword);
-router.put("/profile/update", isAuthenticatedUser, updateProfile);
+router.put("/me/update", isAuthenticatedUser, updateProfile);
 //admin 
 router.get("/admin/allUsers", isAuthenticatedUser,authorisedRole("admin"),getAllUsers);
 router
