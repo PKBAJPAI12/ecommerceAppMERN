@@ -1,15 +1,20 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 function Navbar(){
     return (
+        <>
+          <div class="circle7">
+
+</div>
         <div className="navbar">
         <div className="navleft">
             <ul className="navleftul">
                 <li style={{paddingRight: "0rem"}}><img  style={{width: "2.5rem"}} src={require(`../img/home (3).png`)} alt="" srcset=""/></li>
-                <li style={{paddingLeft: "0.1rem"}}><a href="">Home</a> </li>
-                <li><a href="">Collections</a></li>
-                <li><a href="">Men</a> </li>
-                <li><a href="">Women</a> </li>
-                <li><a href="">Kids</a> </li>
+                <li style={{paddingLeft: "0.1rem"}}><Link to="/">Home</Link></li>
+                <li><Link to="/products">Collections</Link></li>
+                <li><Link to="/">Men</Link></li>
+                <li><Link to="/">Women</Link></li>
+                <li><Link to="/">Kids</Link> </li>
             </ul>
         </div>
         <div className="navcenter">
@@ -38,6 +43,7 @@ function Navbar(){
     
         </div>
     </div>
+        </>
     )
 }
 export default Navbar;

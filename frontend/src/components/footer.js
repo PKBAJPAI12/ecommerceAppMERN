@@ -2,6 +2,8 @@ import React from "react";
 function Footer() {
   return (
     <>
+    <br/>
+    <br/>
       <hr />
       <div
         style={{
