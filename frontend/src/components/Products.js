@@ -1,5 +1,28 @@
 import React from 'react';
+import ReactStars from "react-rating-stars-component";
+import { Link } from "react-router-dom";
 function Products(){
+    let products=[
+        {
+         id:9283, 
+         name:"Easy Care Textured Tshirt",
+         images:[
+            {
+                url:"jdie_product_list.webp"
+            }
+         ],
+         options:{
+            edit:false,
+            color:"rgba(20,20,20,0.1",
+            activeColor:"tomato",
+            size:window.innerWidth<600?18:22,
+            value:3.5,
+            isHalf:true
+        },
+        price:1990,
+        discount:10
+        }
+    ]
     return (
         <div style={{flexDirection: "column"}} className="section">
         <div style={{display: "flex", marginTop: "3rem"}}>
@@ -43,23 +66,27 @@ function Products(){
                 </div>
     
                 <div className="brandproduct">
-                    <div style={{width: "15rem", height:"20rem", background:"linear-gradient(white,#F5F7F9)"}} className="card">
+                {products.map((product)=>(
+                    <Link style={{width: "15rem", height:"22.1rem", background:"linear-gradient(white,#F5F7F9)",textDecoration:"none"}} className="card" to={`${product.id}`}>
                         <img style={{width:"15rem", height:"13rem", borderTopLeftRadius: "2rem"}}
-                             src={require(`../img/jdie_product_list.webp`)} alt="" srcset=""/>
+                             src={require(`../img/${product.images[0].url}`)} alt={product.name} srcset=""/>
                         <div className="offer">
-                            <h3 style={{fontSize: "0.8rem", textAlign:"center"}}>Easy Care Textured Tshirt</h3>
+                            <h3 style={{fontSize: "0.8rem", textAlign:"center"}}>{product.name}</h3>
                             <div style={{display: "flex", marginTop:"0.3rem", justifyContent: "space-between", alignItems: "flex-end"}}>
-                                <h2 style={{color: "red"}}>Flat 10% Off</h2>
-                                <h2>RS.1990</h2>
+                                <h2 style={{color: "red"}}>Flat {product.discount}% Off</h2>
+                                <h2>RS.{product.price}</h2>
                             </div>
-                            <h2 style={{textAlign: "center", fontSize: "1rem"}}>RS.1791</h2>
-    
-    
+                            <div style={{display: "flex", marginTop:"0.3rem", justifyContent: "space-between", alignItems: "center"}}>
+                                <ReactStars {...products[0].options}/> <span style={{textAlign: "center", fontSize: "12px"}}>(250 Reviews)</span>
+                            </div>
+                            <h2 style={{fontSize: "1rem"}}>RS.{(product.price*(100-product.discount))/100}</h2>
                         </div>
                         <div  className="leftsectionbtn1">
                             <input style={{width: "15rem", borderTopRightRadius: "0rem"}} type="button" onclick="add_to_cart()" value="Add to Cart"/>
                         </div>
-                    </div>
+                
+                    </Link>
+                ))}
                 </div>
             </div>
     
