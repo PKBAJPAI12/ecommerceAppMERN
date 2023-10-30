@@ -1,5 +1,6 @@
 import React from "react";
 import Brand from "./Brand";
+import MetaData from "./MetaData";
 function Home() {
     let brands=[
         {
@@ -29,6 +30,7 @@ function Home() {
     ]
   return (
     <>
+      <MetaData title="Ecommerce-Home Page" />
       <div className="section">
         <div className="leftsection">
           <h3 style={{fontSize: "1.2rem", marginBottom: "0.6rem", fontStyle: "italic", fontFamily: "cursive"}}>
