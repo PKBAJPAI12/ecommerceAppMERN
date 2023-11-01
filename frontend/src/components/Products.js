@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactStars from "react-rating-stars-component";
 import MetaData from "./MetaData";
 import { Link } from "react-router-dom";
+import { getProduct } from "../actions/productActions";
+import {useSelector,useDispatch} from "react-redux";
 function Products() {
+  const dispatch=useDispatch();
+  useEffect(()=>{
+dispatch(getProduct());
+  },[dispatch])
   let products = [
     {
       id: 9283,
