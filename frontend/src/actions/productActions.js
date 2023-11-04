@@ -32,7 +32,7 @@ export const getProductDetails = (id) => async (dispatch) => {
     console.log(data);
     dispatch({
       type: PRODUCT_DETAIL_SUCCESS,
-      payload: data.productDetail,
+      payload: data.product,
     });
   } catch (error) {
     dispatch({
