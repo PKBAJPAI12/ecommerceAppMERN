@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import ReactStars from "react-rating-stars-component";
 import MetaData from "./MetaData";
+import Loader from "./Loader";
 import { Link } from "react-router-dom";
 import { getProduct } from "../actions/productActions";
 import {useSelector,useDispatch} from "react-redux";
@@ -167,8 +168,7 @@ dispatch(getProduct());
               All Fashion Style{" "}
             </h1>
           </div>
-
-          <div className="brandproduct">
+          <>{loading?<Loader/>:<div className="brandproduct">
             {products && products.map((product) => (
               <Link
                 style={{
@@ -234,7 +234,7 @@ dispatch(getProduct());
                 </div>
               </Link>
             ))}
-          </div>
+          </div>}</>
         </div>
       </div>
     </div>
