@@ -5,12 +5,19 @@ import Loader from "./Loader";
 import { Link } from "react-router-dom";
 import { getProduct } from "../actions/productActions";
 import {useSelector,useDispatch} from "react-redux";
+import { useAlert } from "react-alert";
 function Products() {
+  const alert = useAlert();
   const dispatch=useDispatch();
   const {loading,error,products,productsCount}=useSelector(state=>state.products);
-  useEffect(()=>{
-dispatch(getProduct());
-  },[dispatch]);
+  
+  useEffect(() => {
+    if (error) {
+      console.log("error");
+      return alert.error(error);
+    }
+    dispatch(getProduct());
+  }, [dispatch, error]);
   /*let products1 = [
     {
       id: 9283,
