@@ -6,10 +6,11 @@ import { getProduct } from "../actions/productActions";
 import {useSelector,useDispatch} from "react-redux";
 function Products() {
   const dispatch=useDispatch();
+  const {loading,error,products,productsCount}=useSelector(state=>state.products);
   useEffect(()=>{
 dispatch(getProduct());
-  },[dispatch])
-  let products = [
+  },[dispatch]);
+  /*let products1 = [
     {
       id: 9283,
       name: "Easy Care Textured Tshirt",
@@ -29,7 +30,14 @@ dispatch(getProduct());
       price: 1990,
       discount: 10,
     },
-  ];
+  ];*/
+  const options = {
+    edit: false,
+    color: "rgba(20,20,20,0.1",
+    activeColor: "tomato",
+    size: window.innerWidth < 600 ? 18 : 22,
+    isHalf: true,
+  };
   return (
     <>
     <MetaData title="Ecommerce-Products" />
@@ -161,7 +169,7 @@ dispatch(getProduct());
           </div>
 
           <div className="brandproduct">
-            {products.map((product) => (
+            {products && products.map((product) => (
               <Link
                 style={{
                   width: "15rem",
@@ -170,9 +178,9 @@ dispatch(getProduct());
                   textDecoration: "none",
                 }}
                 className="card"
-                to={`${product.id}`}
+                to={`${product._id}`}
               >
-                <img
+                <div style={{height:"13rem"}}><img
                   style={{
                     width: "15rem",
                     height: "13rem",
@@ -180,8 +188,8 @@ dispatch(getProduct());
                   }}
                   src={require(`../img/${product.images[0].url}`)}
                   alt={product.name}
-                  srcset=""
-                />
+                  srcSet=""
+                /></div>
                 <div className="offer">
                   <h3 style={{ fontSize: "0.8rem", textAlign: "center" }}>
                     {product.name}
@@ -195,7 +203,7 @@ dispatch(getProduct());
                     }}
                   >
                     <h2 style={{ color: "red" }}>
-                      Flat {product.discount}% Off
+                      Flat 10% Off
                     </h2>
                     <h2>RS.{product.price}</h2>
                   </div>
@@ -207,13 +215,13 @@ dispatch(getProduct());
                       alignItems: "center",
                     }}
                   >
-                    <ReactStars {...products[0].options} />{" "}
+                    <ReactStars value={product.rating} {...options} />
                     <span style={{ textAlign: "center", fontSize: "12px" }}>
-                      (250 Reviews)
+                      ({product.numOfReviews})
                     </span>
                   </div>
                   <h2 style={{ fontSize: "1rem" }}>
-                    RS.{(product.price * (100 - product.discount)) / 100}
+                    RS.{(product.price * (100 - 10)) / 100}
                   </h2>
                 </div>
                 <div className="leftsectionbtn1">

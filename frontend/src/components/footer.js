@@ -18,7 +18,7 @@ function Footer() {
             style={{ width: "4.5rem", margin: "0.4rem" }}
             src={require(`../img/truck.png`)}
             alt=""
-            srcset=""
+            srcSet=""
           />
           <div className="footerhead">
             <h3 style={{ fontSize: "1.1rem" }}>FREE SHIPPING</h3>
@@ -32,7 +32,7 @@ function Footer() {
             style={{ width: "4.5rem", margin: "0.4rem" }}
             src={require(`../img/return-delivery-box.png`)}
             alt=""
-            srcset=""
+            srcSet=""
           />
           <div className="footerhead">
             <h3 style={{ fontSize: "1.1rem" }}>EASY RETURNS</h3>
@@ -44,9 +44,9 @@ function Footer() {
         <div className="cardfooter">
           <img
             style={{ width: "4.5rem" }}
-            src="img/24-hour-call-service.png"
+            src={require(`../img/24-hour-call-service.png`)}
             alt=""
-            srcset=""
+            srcSet=""
           />
           <div className="footerhead">
             <h3 style={{ fontSize: "1.1rem" }}>24/7 SERVICE</h3>
@@ -60,7 +60,7 @@ function Footer() {
             style={{ width: "4.5rem" }}
             src={require(`../img/premium (1).png`)}
             alt=""
-            srcset=""
+            srcSet=""
           />
           <div className="footerhead">
             <h3 style={{ fontSize: "1.1rem" }}>QUALITY PRODUCT</h3>

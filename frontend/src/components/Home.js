@@ -78,7 +78,7 @@ function Home() {
           style={{width: "15rem", position: "relative", top:"-5rem", left: "10rem"}}
           src={require("../img/shopping-bags.png")}
           alt=""
-          srcset=""
+          srcSet=""
         />
         <div className="container">
           <div className="card1">
@@ -163,7 +163,7 @@ function Home() {
           style={{width: "10rem", position: "absolute", right: "15rem", top:"57rem"}}
           src={require("../img/urgent-shopping.png")}
           alt=""
-          srcset=""
+          srcSet=""
         />
         <div style={{margin: "auto", display: "flex"}}>
           <h1 style={{marginRight:"1rem", fontSize: "2.2rem", fontStyle: "italic", fontFamily: "cursive"}}>
@@ -173,7 +173,7 @@ function Home() {
             style={{width: "3rem"}}
             src={require("../img/swirly-scribbled-arrow.png")}
             alt=""
-            srcset=""
+            srcSet=""
           />
         </div>
 
