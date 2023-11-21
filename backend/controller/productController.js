@@ -10,6 +10,7 @@ exports.createProduct = catchAsyncError(async (req, res) => {
 });
 
 exports.getAllProducts = catchAsyncError(async (req, res) => {
+  //return next(new ErrorHandler("Not Found",500));
 const showPerPage=5;
 const productCount=await Product.countDocuments();
 const apiFeature=new ApiFeatures(Product.find(),req.query).search().filter().pagination(showPerPage);
@@ -22,14 +23,14 @@ const apiFeature=new ApiFeatures(Product.find(),req.query).search().filter().pag
 });
 exports.getProductDetails=catchAsyncError(async(req,res,next)=>{
   console.log("get");
-  const productDetail=await Product.findById(req.params.id);
-  if (!productDetail) {
+  const product=await Product.findById(req.params.id);
+  if (!product) {
     console.log("run");
     return next(new ErrorHandler("Product Detail not found",403));
   }
   res.status(200).json(
     { success:true,
-    productDetail });
+      product, });
 });
 exports.updateProduct = catchAsyncError(async (req, res, next) => {
   let product = Product.findById(req.params.id);
