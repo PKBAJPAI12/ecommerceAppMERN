@@ -1,5 +1,5 @@
 .ProductDetails {
-    width: 45%;
+    width: 100%;
     max-width: 100%;
     padding: 6vmax;
     box-sizing: border-box;
@@ -7,7 +7,7 @@
   }
   
   .ProductDetails > div {
-    width: 100%;
+    width: 45%;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
@@ -32,9 +32,11 @@
   }
   .slick-prev::before{
     font-size: 40px;
+    color: darkgrey;
   }
   .slick-next::before{
     font-size: 40px;
+    color: darkgrey;
   }
   .ProductDetails > div:last-child {
     align-items: flex-start;
