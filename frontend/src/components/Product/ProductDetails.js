@@ -5,17 +5,17 @@ import Slider from "react-slick";
 import ReviewCard from "./ReviewCard";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "../productDetails.css";
+import "./productDetails.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
   clearErrors,
   getProductDetails,
   newReview,
-} from "../actions/productActions";
+} from "../../actions/productActions";
 //import ReviewCard from "./ReviewCard.js";
-import Loader from "./Loader";
+import Loader from "../Loader";
 //import { useAlert } from "react-alert";
-import MetaData from "./MetaData";
+import MetaData from "../MetaData";
 import { UncontrolledCarousel } from "reactstrap";
 const ProductDetails = ({ match }) => {
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ const ProductDetails = ({ match }) => {
     (state) => state.productDetail
   );
   const { id } = useParams();
-  console.log(product);
+  console.log(id);
   useEffect(() => {
     dispatch(getProductDetails(id));
   }, [dispatch, id]);
@@ -55,7 +55,7 @@ const ProductDetails = ({ match }) => {
                   <div key={index}>
                     <img
                       style={{width:"366px",height:"400px",borderRadius:"15px"}}
-                      src={require(`../img/${imageUrl.url}`)}
+                      src={require(`../../img/${imageUrl.url}`)}
                       alt={`Slide ${index + 1}`}
                     />
                   </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import Search from './Search';
 function Navbar(){
     return (
         <>
@@ -26,19 +27,7 @@ function Navbar(){
                 <li><img  style={{width: "2.5rem", marginLeft: "0.5rem"}} src={require(`../img/login-arrow.png`)} alt="" srcSet=""/></li>
                 <li><Link to="/">Login</Link> </li>
             </ul>
-            <form style={{display: "flex"}} action="" method="post">
-                <div style={{marginRight:"1rem"}} className="searchform">
-                    <div  className="boximage">
-                        <img style={{width:"1.8rem"}} src={require(`../img/search.png`)} alt="" srcSet=""/>
-                    </div>
-                    <input style={{borderColor: "transparent", color:"white"}} type="text" placeholder="Search" name="trans"/>
-                    <div style={{borderLeft:"1px solid black", paddingLeft:"0.8rem",  display: "flex"}} className="boximage">
-                   <a href=""  ><img style={{width:"1.8rem"}} src={require(`../img/cart.png`)} alt="" srcSet=""/></a>
-                        <span className="cart-items" style={{fontSize:"16px", marginTop: "-4px", color: "blue", marginLeft:"2px" }}></span>
-                    </div>
-                </div>
-    
-            </form>
+            <Search/>
     
     
         </div>
