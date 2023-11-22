@@ -180,7 +180,7 @@ function Products() {
               <Link
                 style={{
                   width: "15rem",
-                  height: "22.1rem",
+                  height: "20rem",
                   background: "linear-gradient(white,#F5F7F9)",
                   textDecoration: "none",
                 }}
@@ -230,14 +230,6 @@ function Products() {
                   <h2 style={{ fontSize: "1rem" }}>
                     RS.{(product.price * (100 - 10)) / 100}
                   </h2>
-                </div>
-                <div className="leftsectionbtn1">
-                  <input
-                    style={{ width: "15rem", borderTopRightRadius: "0rem" }}
-                    type="button"
-                    onclick="add_to_cart()"
-                    value="Add to Cart"
-                  />
                 </div>
               </Link>
             ))}

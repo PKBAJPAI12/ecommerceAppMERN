@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import ReactStars from "react-rating-stars-component";
 import Slider from "react-slick";
+import ReviewCard from "./ReviewCard";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../productDetails.css";
@@ -36,7 +37,7 @@ const ProductDetails = ({ match }) => {
   const options = {
     edit: false,
     color: "rgba(20,20,20,0.1",
-    activeColor: "purple",
+    activeColor: "tomato",
     size: window.innerWidth < 600 ? 18 : 22,
     isHalf: true,
   };
@@ -100,11 +101,23 @@ const ProductDetails = ({ match }) => {
                 Description : <p>{product.description}</p>
               </div>
 
-              <button  className="submitReview">
+              <button className="submitReview">
                 Submit Review
               </button>
             </div>
           </div>
+          
+          <h3 className="reviewsHeading">REVIEWS</h3>
+          {product.reviews && product.reviews[0] ? (
+            <div className="reviews">
+              {product.reviews &&
+                product.reviews.map((review) => (
+                  <ReviewCard key={review._id} review={review} />
+                ))}
+            </div>
+          ) : (
+            <p className="noReviews">No Reviews Yet</p>
+          )}
         </>
       )}
     </>
