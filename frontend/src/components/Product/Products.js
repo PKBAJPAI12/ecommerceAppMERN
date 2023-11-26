@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Product from "../Home/Product";
 import MetaData from "../MetaData";
 import Loader from "../Loader";
@@ -7,19 +7,26 @@ import { getProduct } from "../../actions/productActions";
 import {useSelector,useDispatch} from "react-redux";
 import { useAlert } from "react-alert";
 import { useParams } from "react-router-dom";
+import  Pagination from "react-js-pagination";
+import './product.css'
 function Products() {
   const alert = useAlert();
   const dispatch=useDispatch();
-  const {loading,error,products}=useSelector(state=>state.products);
+  const [currentPage,setCurrentPage]=useState(1);
+  const {loading,error,products,productCount,showPerPage}=useSelector(state=>state.products);
   const {keyword} = useParams();
   console.log(keyword)
+  console.log(`page ${currentPage}`)
+  const handleCurrPage = (e) => {
+    setCurrentPage(e);
+  };
   useEffect(() => {
     if (error) {
       console.log("error");
       return alert.error(error);
     }
-    dispatch(getProduct(keyword));
-  }, [dispatch,keyword,error]);
+    dispatch(getProduct(keyword,currentPage));
+  }, [dispatch,keyword,error,currentPage]);
   return (
     <>
     <MetaData title="Ecommerce-Products" />
@@ -149,11 +156,28 @@ function Products() {
               All Fashion Style{" "}
             </h1>
           </div>
-          <>{loading?<Loader/>:<div className="brandproduct">
+          <>{loading?<Loader/>:<><div className="brandproduct">
             {products && products.map((product) => (
               <Product key={product._id} product={product} />
             ))}
-          </div>}</>
+          </div>
+          <div className="paginationBox">
+            <Pagination
+              activePage={currentPage}
+              itemsCountPerPage={showPerPage}
+              totalItemsCount={productCount}
+              onChange={handleCurrPage}
+              nextPageText="Next"
+              prevPageText="Prev"
+              firstPageText="1st"
+              itemClass="page-item"
+              linkClass="page-link"
+              activeClass="pageItemActive"
+              activeLinkClass="pageLinkActive"
+            />
+          </div>
+          </>}
+          </>
         </div>
       </div>
     </div>
