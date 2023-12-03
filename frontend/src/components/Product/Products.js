@@ -8,31 +8,49 @@ import {useSelector,useDispatch} from "react-redux";
 import { useAlert } from "react-alert";
 import { useParams } from "react-router-dom";
 import  Pagination from "react-js-pagination";
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
 import './product.css'
 function Products() {
   const alert = useAlert();
   const dispatch=useDispatch();
   const [currentPage,setCurrentPage]=useState(1);
-  const {loading,error,products,productCount,showPerPage}=useSelector(state=>state.products);
+  const [price, setPrice] = useState([0, 25000]);
+  const {loading,error,products,productCount,showPerPage,filterProductCounts}=useSelector(state=>state.products);
   const {keyword} = useParams();
   console.log(keyword)
   console.log(`page ${currentPage}`)
   const handleCurrPage = (e) => {
     setCurrentPage(e);
   };
+  const handleSliderChange=(values)=>{
+    console.log(`values ${values}`)
+    setPrice(values);
+    console.log(`price ${price}`)
+  }
   useEffect(() => {
     if (error) {
       console.log("error");
       return alert.error(error);
     }
-    dispatch(getProduct(keyword,currentPage));
-  }, [dispatch,keyword,error,currentPage]);
+    dispatch(getProduct(keyword,currentPage,price));
+  }, [dispatch,keyword,error,currentPage,price]);
+  let count=filterProductCounts;
+  console.log(`c ${count}`)
   return (
     <>
     <MetaData title="Ecommerce-Products" />
     <div style={{ flexDirection: "column" }} className="section">
       <div style={{ display: "flex", marginTop: "3rem" }}>
         <div style={{ width: "25%", marginTop: "2rem" }}>
+        <label>Price</label>
+      <Slider
+        range
+        min={0}
+        max={25000}
+        value={price}
+        onChange={handleSliderChange}
+      />
           <div className="collectionsection">
             <h1 style={{ marginBottom: "0.7rem", fontSize: "1.5rem" }}>
               Collections
@@ -161,7 +179,8 @@ function Products() {
               <Product key={product._id} product={product} />
             ))}
           </div>
-          <div className="paginationBox">
+          {showPerPage < count && (
+            <div className="paginationBox">
             <Pagination
               activePage={currentPage}
               itemsCountPerPage={showPerPage}
@@ -176,6 +195,7 @@ function Products() {
               activeLinkClass="pageLinkActive"
             />
           </div>
+          )}
           </>}
           </>
         </div>
