@@ -36,7 +36,7 @@ search() {
   pagination(showPerPage){
   const currentPage=Number(this.queryStr.page)|| 1;
   const skip=(currentPage-1)*showPerPage;
-  this.query=this.query.limit(showPerPage).skip(skip);
+  this.query = this.query.skip(skip).limit(showPerPage);
   return this;
   }
 }

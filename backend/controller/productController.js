@@ -10,18 +10,22 @@ exports.createProduct = catchAsyncError(async (req, res) => {
 });
 
 exports.getAllProducts = catchAsyncError(async (req, res) => {
-  //return next(new ErrorHandler("Not Found",500));
-const showPerPage=9;
-const productCount=await Product.countDocuments();
-const apiFeature=new ApiFeatures(Product.find(),req.query).search().filter().pagination(showPerPage);
- const products=await apiFeature.query;
-  res.status(200).json(
-    { success:true,
-   products,
-   productCount,
-   showPerPage,
-   });
+  const showPerPage = 1;
+  const productCount = await Product.countDocuments();
+  const apiFeature = new ApiFeatures(Product.find(), req.query).search().filter();
+  let products = await apiFeature.query;
+  const filterProductCounts = products.length;
+  const apiFeature1 = new ApiFeatures(Product.find(), req.query).search().filter().pagination(showPerPage);
+  products = await apiFeature1.query;
+  res.status(200).json({
+    success: true,
+    products,
+    productCount,
+    showPerPage,
+    filterProductCounts,
+  });
 });
+
 exports.getProductDetails=catchAsyncError(async(req,res,next)=>{
   console.log("get");
   const product=await Product.findById(req.params.id);
