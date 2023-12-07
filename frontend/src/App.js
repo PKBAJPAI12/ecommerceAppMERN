@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import Products from "./components/Product/Products";
 import ProductDetails from "./components/Product/ProductDetails";
 import Search from "./components/Search";
+import Signup from "./components/User/signupUser";
 import {BrowserRouter as Router,Route,Routes} from "react-router-dom";
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/products/:keyword" element={<Products />} />
         <Route path="/product/:id" element={<ProductDetails />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
       <Footer />
     </Router>
