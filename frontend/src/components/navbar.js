@@ -25,7 +25,7 @@ function Navbar(){
         <div className="navright">
             <ul>
                 <li><img  style={{width: "2.5rem", marginLeft: "0.5rem"}} src={require(`../img/login-arrow.png`)} alt="" srcSet=""/></li>
-                <li><Link to="/">Login</Link> </li>
+                <li><Link to="/login">Login</Link> </li>
             </ul>
             <Search/>
     
