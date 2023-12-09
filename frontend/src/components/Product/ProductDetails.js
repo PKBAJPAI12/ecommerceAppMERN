@@ -6,6 +6,8 @@ import ReviewCard from "./ReviewCard";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./productDetails.css";
+import Navbar from '../navbar';
+import Footer from "../footer";
 import { useSelector, useDispatch } from "react-redux";
 import {
   clearErrors,
@@ -48,6 +50,7 @@ const ProductDetails = ({ match }) => {
       ) : (
         <>
           <MetaData title={`${product.name} -- ECOMMERCE`} />
+          <Navbar />
           <div className="ProductDetails">
             <div>
                <Slider {...settings}>
@@ -120,6 +123,7 @@ const ProductDetails = ({ match }) => {
           )}
         </>
       )}
+      <Footer />
     </>
   );
 };

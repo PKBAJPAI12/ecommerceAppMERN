@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import MetaData from "../MetaData";
+import Navbar from '../navbar';
+import Footer from "../footer";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, register } from "../../actions/userAction";
@@ -45,6 +47,7 @@ const Signup = () => {
   return (
     <>
     <MetaData title="Ecommerce-Signup" />
+    <Navbar/>
     <div className="loginsection">
       <div className="rightlogin">
         <div className="triangle"></div>
@@ -211,6 +214,7 @@ const Signup = () => {
         </div>
       </div>
     </div>
+    <Footer/>
     </>
   );
 };

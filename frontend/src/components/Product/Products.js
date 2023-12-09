@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import Product from "../Home/Product";
 import MetaData from "../MetaData";
 import Loader from "../Loader";
+import Navbar from '../navbar';
+import Footer from "../footer";
 import { Link } from "react-router-dom";
 import { getProduct } from "../../actions/productActions";
 import {useSelector,useDispatch} from "react-redux";
@@ -40,6 +42,7 @@ function Products() {
   return (
     <>
     <MetaData title="Ecommerce-Products" />
+    <Navbar/>
     <div style={{ flexDirection: "column" }} className="section">
       <div style={{ display: "flex", marginTop: "3rem" }}>
         <div style={{ width: "25%", marginTop: "2rem" }}>
@@ -201,6 +204,7 @@ function Products() {
         </div>
       </div>
     </div>
+    <Footer/>
     </>
   );
 }

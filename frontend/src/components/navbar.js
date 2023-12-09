@@ -1,7 +1,16 @@
-import React from "react";
+import React,{ useEffect} from "react";
 import { Link } from "react-router-dom";
 import Search from "./Search";
+import store from "../store";
+import {loadUser} from '../actions/userAction';
+import { useSelector } from "react-redux";
 function Navbar() {
+  const { isAuthenticated, user } = useSelector(
+    (state) => state.user
+  );
+  useEffect(()=>{
+    store.dispatch(loadUser());
+  },[])
   return (
     <>
       <div className="circle7"></div>
@@ -43,17 +52,35 @@ function Navbar() {
         </div>
         <div className="navright">
           <ul>
-            <li>
-              <img
-                style={{ width: "2.5rem", marginLeft: "0.5rem" }}
-                src={require(`../img/login-arrow.png`)}
-                alt=""
-                srcSet=""
-              />
-            </li>
-            <li>
-              <Link to="/login">Login</Link>{" "}
-            </li>
+          {isAuthenticated ? (
+              <>
+                <li>
+                  <img
+                    style={{ width: "2.5rem", marginLeft: "0.5rem" }}
+                    src={import("../img/logout-arrow.png")}
+                    alt=""
+                    srcSet=""
+                  />
+                </li>
+                <li>
+                  <Link to="/logout">Logout</Link>{" "}
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <img
+                    style={{ width: "2.5rem", marginLeft: "0.5rem" }}
+                    src={import("../img/login-arrow.png")}
+                    alt=""
+                    srcSet=""
+                  />
+                </li>
+                <li>
+                  <Link to="/login">Login</Link>{" "}
+                </li>
+              </>
+            )}
           </ul>
           <Search />
         </div>
