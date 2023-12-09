@@ -1,7 +1,34 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import MetaData from "../MetaData";
 import { Link } from "react-router-dom";
-const loginUser = () => {
+import { useDispatch, useSelector } from "react-redux";
+import { clearErrors, login } from "../../actions/userAction";
+import { useAlert } from "react-alert";
+import { useNavigate } from "react-router-dom";
+const Login = () => {
+  const dispatch = useDispatch();
+  const alert = useAlert();
+  const navigate = useNavigate();
+  const [email,setEmail]=useState("");
+  const [password,setPassword]=useState("");
+  const { error, loading, isAuthenticated } = useSelector(
+    (state) => state.user
+  );
+  const loginSubmit = (e) => {
+    e.preventDefault();
+    dispatch(login(email, password));
+  };
+  //const redirect = location.search ? location.search.split("=")[1] : "/account";
+  useEffect(() => {
+    if (error) {
+      alert.error(error);
+      dispatch(clearErrors());
+    }
+
+    if (isAuthenticated) {
+      navigate(`/account`);
+    }
+  }, [dispatch, error, alert, navigate, isAuthenticated]);
   return (
     <>
       <MetaData title="Ecommerce-Login" />
@@ -23,7 +50,7 @@ const loginUser = () => {
             />
             <h1 style={{ fontSize: "1.9rem", margin: "auto" }}>Login</h1>
           </div>
-          <form style={{ width: "75%" }}>
+          <form style={{ width: "75%" }} onSubmit={loginSubmit}>
             <div className="formcol">
               <div className="formlevel">
                 <img
@@ -43,8 +70,10 @@ const loginUser = () => {
                 }}
                 name="email"
                 type="email"
+                value={email}
                 className="form-control"
                 placeholder="Enter email"
+                onChange={(e)=>setEmail(e.target.value)}
               />
             </div>
             <div className="formcol">
@@ -66,8 +95,10 @@ const loginUser = () => {
                 }}
                 name="password"
                 type="password"
+                value={password}
                 className="form-control"
                 placeholder="Enter Password"
+                onChange={(e)=>setPassword(e.target.value)}
               />
             </div>
             <div className="formsectionbtn">
@@ -122,4 +153,4 @@ const loginUser = () => {
     </>
   );
 };
-export default loginUser;
+export default Login;

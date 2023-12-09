@@ -56,6 +56,8 @@ userSchema.methods.getJWTToken=function(){
     });
 }
 userSchema.methods.comparePassword=async function(userPassword){
+  console.log(userPassword);
+  console.log(this.password)
  return await bcrypt.compare(userPassword,this.password);
 }
 userSchema.methods.getResetPasswordToken=function(){

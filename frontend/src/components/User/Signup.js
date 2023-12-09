@@ -3,10 +3,8 @@ import MetaData from "../MetaData";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, register } from "../../actions/userAction";
-import { useAlert } from "react-alert";
 const Signup = () => {
   const dispatch = useDispatch();
-  const alert = useAlert();
   const [user, setUser] = useState({
     name: "",
     email: "",

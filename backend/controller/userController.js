@@ -31,10 +31,12 @@ exports.loginUser=catchAsyncError(async(req,res,next)=>{
         return next(new ErrorHandler("Please Enter Email and Password",400));
     }
     const user=await User.findOne({email}).select("+password");
+    console.log(user);
     if(!user){
         return next(new ErrorHandler("Invalid Email or Password",401));
     }
     const isPasswordMatched=await user.comparePassword(password);
+    console.log(isPasswordMatched);
     if(!isPasswordMatched){
         return next(new ErrorHandler("Invalid Email or Password",401));
     }
