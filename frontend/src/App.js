@@ -5,7 +5,7 @@ import Home from "./components/Home";
 import Products from "./components/Product/Products";
 import ProductDetails from "./components/Product/ProductDetails";
 import Search from "./components/Search";
-import Signup from "./components/User/signupUser";
+import Signup from "./components/User/Signup";
 import Login from "./components/User/loginUser";
 import {BrowserRouter as Router,Route,Routes} from "react-router-dom";
 function App() {

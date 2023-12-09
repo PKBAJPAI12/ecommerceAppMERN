@@ -1,7 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import MetaData from "../MetaData";
 import { Link } from "react-router-dom";
-const signupUser = () => {
+const Signup = () => {
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+  const { name, email, password } = user;
+  const [avatar, setAvatar] = useState("/Profile.png");
+  const [avatarPreview, setAvatarPreview] = useState("/Profile.png");
+  console.log(`name ${name}`)
+  console.log(`email ${email}`)
+  console.log(`password ${password}`)
+  const signupSubmit = (e) => {
+    e.preventDefault();
+
+    const myForm = new FormData();
+
+    myForm.set("name", name);
+    myForm.set("email", email);
+    myForm.set("password", password);
+    myForm.set("avatar", avatar);
+  };
+  const inputHandler = (e) => {
+    if (e.target.name === "avatar") {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          setAvatarPreview(reader.result);
+          setAvatar(reader.result);
+        }
+      };
+
+      reader.readAsDataURL(e.target.files[0]);
+    } else {
+      setUser({ ...user, [e.target.name]: e.target.value });
+    }
+  };
   return (
     <>
     <MetaData title="Ecommerce-Signup" />
@@ -23,14 +60,14 @@ const signupUser = () => {
           />
           <h1 style={{ fontSize: "1.9rem", margin: "auto" }}>Sign Up</h1>
         </div>
-        <form style={{ width: "75%" }}>
+        <form style={{ width: "75%" }} onSubmit={signupSubmit} encType="multipart/form-data">
           <div className="formcol">
             <div className="formlevel">
               <img
                 style={{ width: "2rem", marginRight: "1rem" }}
                 src={require(`../../img/user (2).png`)}
                 alt=""
-                srcset=""
+                srcSet=""
               />
               <label>Name</label>
             </div>
@@ -41,19 +78,22 @@ const signupUser = () => {
                 marginBottom: "1rem",
                 borderRadius: "0.4rem",
               }}
-              name="user_name"
+              name="name"
+              value={name}
               type="text"
               className="form-control"
               placeholder="Enter Name"
+              onChange={inputHandler}
             />
           </div>
-          <div className="formcol">
+          <div className="formrows">
+          <div style={{width: "45%"}} className="formcol">
             <div className="formlevel">
               <img
                 style={{ width: "2rem", marginRight: "1rem" }}
                 src={require(`../../img/email.png`)}
                 alt=""
-                srcset=""
+                srcSet=""
               />
               <label>Email Address</label>
             </div>
@@ -64,19 +104,21 @@ const signupUser = () => {
                 marginBottom: "1rem",
                 borderRadius: "0.4rem",
               }}
-              name="user_email"
+              name="email"
+              value={email}
               type="email"
               className="form-control"
               placeholder="Enter email"
+              onChange={inputHandler}
             />
-          </div>
-          <div className="formcol">
+        </div>
+          <div style={{width: "45%"}} className="formcol">
             <div className="formlevel">
               <img
                 style={{ width: "2rem", marginRight: "1rem" }}
                 src={require(`../../img/lock (1).png`)}
                 alt=""
-                srcset=""
+                srcSet=""
               />
               <label>Password</label>
             </div>
@@ -87,10 +129,38 @@ const signupUser = () => {
                 marginBottom: "1rem",
                 borderRadius: "0.4rem",
               }}
-              name="user_password"
+              name="password"
               type="password"
+              value={password}
               className="form-control"
               placeholder="Enter Password"
+              onChange={inputHandler}
+            />
+          </div>
+          </div>
+          <div className="formcol">
+            <div className="formlevel">
+              <img
+                style={{ width: "2rem", marginRight: "1rem" }}
+                src={require(`../../img/user (2).png`)}
+                alt=""
+                srcSet=""
+              />
+              <label>Upload Profile Pic</label>
+            </div>
+            <input
+              style={{
+                color: "black",
+                padding: "0.5rem",
+                marginBottom: "1rem",
+                borderRadius: "0.4rem",
+              }}
+              name="avatar"
+              type="file"
+              accept="image/*"
+              className="form-control"
+              placeholder="Upload Pic"
+              onChange={inputHandler}
             />
           </div>
           <div className="formsectionbtn">
@@ -141,4 +211,4 @@ const signupUser = () => {
     </>
   );
 };
-export default signupUser;
+export default Signup;
