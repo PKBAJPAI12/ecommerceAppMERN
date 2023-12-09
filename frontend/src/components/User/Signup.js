@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import MetaData from "../MetaData";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { clearErrors, register } from "../../actions/userAction";
+import { useAlert } from "react-alert";
 const Signup = () => {
+  const dispatch = useDispatch();
+  const alert = useAlert();
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -15,13 +20,13 @@ const Signup = () => {
   console.log(`password ${password}`)
   const signupSubmit = (e) => {
     e.preventDefault();
-
     const myForm = new FormData();
-
     myForm.set("name", name);
     myForm.set("email", email);
     myForm.set("password", password);
     myForm.set("avatar", avatar);
+    dispatch(register(myForm));
+    console.log("done");
   };
   const inputHandler = (e) => {
     if (e.target.name === "avatar") {
