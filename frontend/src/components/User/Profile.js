@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import MetaData from "../MetaData";
 import Navbar from "../navbar";
 import Footer from "../footer";
 import { Link } from "react-router-dom";
@@ -8,8 +9,11 @@ const Profile = () => {
         (state) => state.user
       );
     return (
-     <>
+     <>  
+        <MetaData title="Ecommerce-Profile" />
         <Navbar/>
+        {isAuthenticated &&
+        <>
         <div style={{marginTop:"1.5rem", marginLeft: "0rem", marginRight: "1.5rem"}}  className="section">
     <div style={{width:"25%", backgroundColor:"white", borderTopRightRadius: "5rem", marginRight:"2rem", borderTop:"2px solid #E110E9", borderRight:"1px solid #E110E9"}}>
         <div className="verticalnav" >
@@ -53,15 +57,17 @@ const Profile = () => {
         <h4><strong>Email Address:</strong>{user.email}</h4>
     </div>
     <div className="servicecard">
-        <h4><strong>Date:</strong>{user.createdAt.substring(0,10)}</h4>
+        <h4><strong>Joined on:</strong>{String(user.createdAt).substr(0, 10)}</h4>
     </div>
 </div>
 </div>
         </div>
     </div>
 
-</div>
-<hr/>
+       </div>
+        <hr/>
+        </>
+        }
         <Footer/>
      </>
     )

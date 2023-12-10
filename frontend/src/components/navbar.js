@@ -5,17 +5,24 @@ import store from "../store";
 import {loadUser,logout} from '../actions/userAction';
 import { useSelector,useDispatch } from "react-redux";
 import { useAlert } from "react-alert";
+import { useNavigate } from "react-router-dom";
 function Navbar() {
   const dispatch = useDispatch();
+  const navigate=useNavigate();
   const alert=useAlert();
   const [showDashboard,setShowDashboard]=useState(false);
   const { isAuthenticated, user } = useSelector(
     (state) => state.user
   );
   function logoutUser(){
-    dispatch(logout());
-    alert.success("Logout Successfully");
-  }
+    store.dispatch(loadUser()).then(() => {
+      dispatch(logout());
+      console.log("Logout action dispatched");
+      alert.success("Logout Successfully");
+      console.log("Navigating to login page");
+      navigate('/login');
+    });
+}
   function toggleDashboard() {
     setShowDashboard(!showDashboard);
   }
@@ -73,8 +80,8 @@ function Navbar() {
                     srcSet=""
                   />
                 </li>
-                <li>
-                  <p onClick={logoutUser}>Logout</p>
+                <li onClick={logoutUser}>
+                  <p>Logout</p>
                 </li>
                 <li onClick={toggleDashboard} id="dashboard"><div className="circlenav">
                 <h1 style={{textAlign: "center"}}>{user.name.charAt(0)}</h1>
