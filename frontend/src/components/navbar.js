@@ -1,13 +1,24 @@
-import React,{ useEffect} from "react";
+import React,{useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import Search from "./Search";
 import store from "../store";
-import {loadUser} from '../actions/userAction';
-import { useSelector } from "react-redux";
+import {loadUser,logout} from '../actions/userAction';
+import { useSelector,useDispatch } from "react-redux";
+import { useAlert } from "react-alert";
 function Navbar() {
+  const dispatch = useDispatch();
+  const alert=useAlert();
+  const [showDashboard,setShowDashboard]=useState(false);
   const { isAuthenticated, user } = useSelector(
     (state) => state.user
   );
+  function logoutUser(){
+    dispatch(logout());
+    alert.success("Logout Successfully");
+  }
+  function toggleDashboard() {
+    setShowDashboard(!showDashboard);
+  }
   useEffect(()=>{
     store.dispatch(loadUser());
   },[])
@@ -57,27 +68,54 @@ function Navbar() {
                 <li>
                   <img
                     style={{ width: "2.5rem", marginLeft: "0.5rem" }}
-                    src={import("../img/logout-arrow.png")}
+                    src={require(`../img/logout-arrow.png`)}
                     alt=""
                     srcSet=""
                   />
                 </li>
                 <li>
-                  <Link to="/logout">Logout</Link>{" "}
+                  <p onClick={logoutUser}>Logout</p>
                 </li>
+                <li onClick={toggleDashboard} id="dashboard"><div className="circlenav">
+                <h1 style={{textAlign: "center"}}>{user.name.charAt(0)}</h1>
+            </div></li>
+            <div style={{backgroundColor: "white", display: showDashboard ? "inline" : "none"}} className="dashboardnav">
+                <div style={{display: "flex", justifyContent: "center", marginTop:"0.5rem", marginBottom:"0.5rem"}}>
+                    <div style={{width:"3.2rem", height: "3.2rem"}} className="circlenav">
+                        <h1 style={{textAlign: "center", marginTop:"0.5rem"}}>{user.name.charAt(0)}</h1>
+                    </div>
+                    <div style={{marginLeft: "0.5rem", display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                        <h2>{user.name}</h2>
+                        <p>{user.email}</p>
+                    </div>
+
+                </div>
+                <hr/>
+                <div>
+                    <ul style={{flexDirection: "column"}}>
+                        {user.role==="admin" &&
+                        <li><Link to="/dashboard/admin">My Dashboard</Link> </li>
+                        }
+                        <li><Link to="/account">My Account</Link> </li>
+                        <li><Link to="/orders">My Orders</Link> </li>
+                        <li><Link to="/cart">MyCart</Link> </li>
+                    </ul>
+                </div>
+
+            </div>
               </>
             ) : (
               <>
                 <li>
                   <img
                     style={{ width: "2.5rem", marginLeft: "0.5rem" }}
-                    src={import("../img/login-arrow.png")}
+                    src={require(`../img/login-arrow.png`)}
                     alt=""
                     srcSet=""
                   />
                 </li>
                 <li>
-                  <Link to="/login">Login</Link>{" "}
+                <Link to="/login">Login</Link>
                 </li>
               </>
             )}

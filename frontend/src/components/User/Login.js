@@ -13,7 +13,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [email,setEmail]=useState("");
   const [password,setPassword]=useState("");
-  const { error, loading, isAuthenticated } = useSelector(
+  const { error, loading, isAuthenticated,user } = useSelector(
     (state) => state.user
   );
   const loginSubmit = (e) => {
@@ -28,7 +28,13 @@ const Login = () => {
     }
 
     if (isAuthenticated) {
-      navigate(`/account`);
+      if(user.role==="admin"){
+        navigate(`/dashboard/admin`);
+        alert.success("Login Successfully")
+      }else{
+        navigate(`/account`);
+        alert.success("Login Successfully")
+      }
     }
   }, [dispatch, error, alert, navigate, isAuthenticated]);
   return (

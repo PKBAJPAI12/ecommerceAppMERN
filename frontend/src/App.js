@@ -9,6 +9,7 @@ import {BrowserRouter as Router,Route,Routes} from "react-router-dom";
 import store from "./store";
 import {loadUser} from './actions/userAction';
 import { useSelector } from "react-redux";
+import Profile from "./components/User/Profile";
 function App() {
   const { isAuthenticated, user } = useSelector(
     (state) => state.user
@@ -27,6 +28,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         }
         <Route path="/login" element={<Login />} />
+        <Route path="/account" element={<Profile />} />
       </Routes>
     </Router>
   );

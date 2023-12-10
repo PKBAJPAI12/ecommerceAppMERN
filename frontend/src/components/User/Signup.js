@@ -1,12 +1,19 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import MetaData from "../MetaData";
 import Navbar from '../navbar';
 import Footer from "../footer";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch,useSelector} from "react-redux";
+import { useAlert } from "react-alert";
 import { clearErrors, register } from "../../actions/userAction";
+import { useNavigate } from "react-router-dom";
 const Signup = () => {
   const dispatch = useDispatch();
+  const alert = useAlert();
+  const navigate=useNavigate();
+  const {isAuthenticated } = useSelector(
+    (state) => state.user
+  );
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -18,6 +25,12 @@ const Signup = () => {
   console.log(`name ${name}`)
   console.log(`email ${email}`)
   console.log(`password ${password}`)
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate(`/account`);
+      alert.success("Login Successfully")
+    }
+  }, [dispatch, navigate, isAuthenticated]);
   const signupSubmit = (e) => {
     e.preventDefault();
     const myForm = new FormData();
