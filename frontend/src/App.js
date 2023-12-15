@@ -10,6 +10,7 @@ import store from "./store";
 import {loadUser} from './actions/userAction';
 import { useSelector } from "react-redux";
 import Profile from "./components/User/Profile";
+import UpdateProfile from "./components/User/UpdateProfile"
 function App() {
   const { isAuthenticated, user } = useSelector(
     (state) => state.user
@@ -29,6 +30,7 @@ function App() {
         }
         <Route path="/login" element={<Login />} />
         <Route path="/account" element={<Profile />} />
+        <Route path="/update/profile" element={<UpdateProfile />} />
       </Routes>
     </Router>
   );

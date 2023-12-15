@@ -15,24 +15,74 @@ const Profile = () => {
         {isAuthenticated &&
         <>
         <div style={{marginTop:"1.5rem", marginLeft: "0rem", marginRight: "1.5rem"}}  className="section">
-    <div style={{width:"25%", backgroundColor:"white", borderTopRightRadius: "5rem", marginRight:"2rem", borderTop:"2px solid #E110E9", borderRight:"1px solid #E110E9"}}>
-        <div className="verticalnav" >
-            <div style={{borderTopRightRadius: "1.1rem"}} className="verticalnavele">
-                <img style={{width: "2.5rem", marginRight: "1rem"}} src={require(`../../img/dashboard.png`)} alt="" srcset=""/>
-                <h4 style={{fontSize: "1.2rem"}}><Link style={{textDecoration: "none"}} to="/account">Account</Link></h4>
-            </div>
-            <div className="verticalnavele" >
-                <img style={{width: "2.5rem",  marginRight: "1rem"}} src={require(`../../img/orders.png`)} alt="" srcset=""/>
-                <h4 style={{fontSize: "1.2rem"}}><Link style={{textDecoration: "none"}} to="/order">Orders</Link></h4>
-
+        <div
+          style={{
+            width: "25%",
+            backgroundColor: "white",
+            borderTopRightRadius: "5rem",
+            marginRight: "2rem",
+            borderTop: "2px solid #E110E9",
+            borderRight: "1px solid #E110E9",
+          }}
+        >
+          <div className="verticalnav">
+            <div
+              style={{ borderTopRightRadius: "1.1rem" }}
+              className="verticalnavele"
+            >
+              <img
+                style={{ width: "2.5rem", marginRight: "1rem" }}
+                src={require(`../../img/dashboard.png`)}
+                alt=""
+                srcset=""
+              />
+              <h4 style={{ fontSize: "1.2rem" }}>
+                <Link style={{ textDecoration: "none" }} to="/account">
+                  Account
+                </Link>
+              </h4>
             </div>
             <div className="verticalnavele">
-                <img style={{width: "2.5rem", marginRight: "1rem"}} src={require(`../../img/product (1).png`)} alt="" srcset=""/>
-                <h4 style={{fontSize: "1.2rem"}}><Link style={{textDecoration: "none"}} to="/cart">My Cart</Link></h4>
-
+              <img
+                style={{ width: "2.5rem", marginRight: "1rem" }}
+                src={require(`../../img/orders.png`)}
+                alt=""
+                srcset=""
+              />
+              <h4 style={{ fontSize: "1.2rem" }}>
+                <Link style={{ textDecoration: "none" }} to="/order">
+                  Orders
+                </Link>
+              </h4>
             </div>
+            <div className="verticalnavele">
+              <img
+                style={{ width: "2.5rem", marginRight: "1rem" }}
+                src={require(`../../img/product (1).png`)}
+                alt=""
+                srcset=""
+              />
+              <h4 style={{ fontSize: "1.2rem" }}>
+                <Link style={{ textDecoration: "none" }} to="/cart">
+                  My Cart
+                </Link>
+              </h4>
+            </div>
+            <div className="verticalnavele">
+              <img
+                style={{ width: "2.5rem", marginRight: "1rem" }}
+                src={require(`../../img/product (1).png`)}
+                alt=""
+                srcset=""
+              />
+              <h4 style={{ fontSize: "1.2rem" }}>
+                <Link style={{ textDecoration: "none" }} to="/cart">
+                  Update Profile
+                </Link>
+              </h4>
+            </div>
+          </div>
         </div>
-    </div>
 
     <div style={{width:"75%"}}>
 
