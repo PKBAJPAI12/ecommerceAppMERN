@@ -130,7 +130,7 @@ const UpdateProfile = () => {
                 srcset=""
               />
               <h4 style={{ fontSize: "1.2rem" }}>
-                <Link style={{ textDecoration: "none" }} to="/cart">
+                <Link style={{ textDecoration: "none" }} to="/update/profile">
                   Update Profile
                 </Link>
               </h4>
