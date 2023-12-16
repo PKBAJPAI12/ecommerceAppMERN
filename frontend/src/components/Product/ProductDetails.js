@@ -9,6 +9,7 @@ import "./productDetails.css";
 import Navbar from '../navbar';
 import Footer from "../footer";
 import { useSelector, useDispatch } from "react-redux";
+import {addItemsToCart} from "../../actions/cartActions"
 import {
   clearErrors,
   getProductDetails,
@@ -16,16 +17,36 @@ import {
 } from "../../actions/productActions";
 //import ReviewCard from "./ReviewCard.js";
 import Loader from "../Loader";
-//import { useAlert } from "react-alert";
+import { useAlert } from "react-alert";
 import MetaData from "../MetaData";
 import { UncontrolledCarousel } from "reactstrap";
-const ProductDetails = ({ match }) => {
+const ProductDetails = () => {
   const dispatch = useDispatch();
+  const alert=useAlert();
   const { product, loading, error } = useSelector(
     (state) => state.productDetail
   );
+
+  const [quantity,setQuantity]=useState(1);
+  const decreaseQuantity=()=>{
+    if (1 >= quantity) return;
+
+    const qty = quantity - 1;
+    setQuantity(qty);
+  }
+  const increaseQuantity=()=>{
+    if (product.Stock <= quantity) return;
+
+    const qty = quantity + 1;
+    setQuantity(qty);
+  }
   const { id } = useParams();
   console.log(id);
+  
+  const addToCartHandler = () => {
+    dispatch(addItemsToCart(id, quantity));
+    alert.success("Item Added To Cart");
+  };
   useEffect(() => {
     dispatch(getProductDetails(id));
   }, [dispatch, id]);
@@ -81,12 +102,13 @@ const ProductDetails = ({ match }) => {
                 <h1>{`₹${product.price}`}</h1>
                 <div className="detailsBlock-3-1">
                   <div className="detailsBlock-3-1-1">
-                    <button>-</button>
-                    <input readOnly type="number"  />
-                    <button >+</button>
+                    <button onClick={decreaseQuantity}>-</button>
+                    <span>{quantity}</span>
+                    <button onClick={increaseQuantity}>+</button>
                   </div>
                   <button
                     disabled={product.Stock < 1 ? true : false}
+                    onClick={addToCartHandler}
                   >
                     Add to Cart
                   </button>
