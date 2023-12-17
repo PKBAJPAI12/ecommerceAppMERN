@@ -174,7 +174,7 @@ function Home() {
           </h1>
           <img
             style={{width: "3rem"}}
-            src={require("../img/swirly-scribbled-arrow.png")}
+            src={require("../img/new images/swirly-scribbled-arrow.png")}
             alt=""
             srcSet=""
           />
