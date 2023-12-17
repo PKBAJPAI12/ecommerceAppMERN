@@ -231,12 +231,9 @@ const Shipping = () => {
                 />
               </div>
             </div>
-            <input
-              type="submit"
-              value="Continue"
-              className="shippingBtn"
-              disabled={state ? false : true}
-            />
+            <div style={{width:"85%", margin:"3rem auto"}} className="formsectionbtn">
+                 <input style={{width: "7rem", padding: "0.7rem"}} disabled={state ? false : true} className="newsectionbtn" type="submit" value="Continues"/>
+            </div>
           </form>
         </div>
       </div>
