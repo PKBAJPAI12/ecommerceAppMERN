@@ -51,7 +51,10 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/shipping" element={<Shipping/>}/>
         <Route path="/order/confirm" element={<Order/>}/>
-        <Route path="/process/payment" element={<Payment />} />
+        {stripeApiKey && (
+          <Route path="/process/payment" element={<Payment />} />
+        )
+        }
       </Routes>
     </Router>
   );
