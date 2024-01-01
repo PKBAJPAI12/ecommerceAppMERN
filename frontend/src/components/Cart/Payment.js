@@ -1,18 +1,120 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef  } from "react";
 import Footer from "../footer";
 import Navbar from "../navbar";
 import MetaData from "../MetaData";
 import CheckoutSteps from "./CheckoutSteps";
+import { useSelector, useDispatch } from "react-redux";
+import { useAlert } from "react-alert";
 import "./Payment.css";
+import { loadStripe } from '@stripe/stripe-js';
+//import { createOrder, clearErrors } from "../../actions/orderActions";
+import {
+    useStripe,
+    useElements,
+  } from '@stripe/react-stripe-js';
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const Payment = () => {
     const [cardNumber,setCardNumber]=useState("################");
     const [cardHolderName,setCardHolderName]=useState("Card Holder Name");
     const [cardExpiry,setCardExpiry]=useState("mm/yy");
     const [cardCvv,setCardCvv]=useState("");
+    const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
+
+  const dispatch = useDispatch();
+  const alert = useAlert();
+  const stripe = useStripe();
+  const payBtn = useRef(null);
+const navigate=useNavigate();
+  const { shippingInfo, cartItems } = useSelector((state) => state.cart);
+  const { user } = useSelector((state) => state.user);
+  //const { error } = useSelector((state) => state.newOrder);
+
+  const paymentData = {
+    ammount: Math.round(orderInfo.totalPrice * 100),
+  };
+
+  const order = {
+    shippingInfo,
+    orderItems: cartItems,
+    itemsPrice: orderInfo.subtotal,
+    taxPrice: orderInfo.tax,
+    shippingPrice: orderInfo.shippingCharges,
+    totalPrice: orderInfo.totalPrice,
+  };
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+
+    payBtn.current.disabled = true;
+
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const { data } = await axios.post(
+        "/api/v1/payment/process",
+        paymentData,
+        config
+      );
+
+      const client_secret = data.client_secret;
+
+      if (!stripe) return;
+
+      const result = await stripe.confirmCardPayment(client_secret, {
+        payment_method: {
+          card: cardNumber,
+          billing_details: {
+            name: user.name,
+            email: user.email,
+            address: {
+              line1: shippingInfo.address,
+              city: shippingInfo.city,
+              state: shippingInfo.state,
+              postal_code: shippingInfo.pinCode,
+              country: shippingInfo.country,
+            },
+          },
+        },
+      });
+
+      if (result.error) {
+        payBtn.current.disabled = false;
+
+        alert.error(result.error.message);
+      } else {
+        if (result.paymentIntent.status === "succeeded") {
+          order.paymentInfo = {
+            id: result.paymentIntent.id,
+            status: result.paymentIntent.status,
+          };
+
+         // dispatch(createOrder(order));
+
+          navigate("/success");
+        } else {
+          alert.error("There's some issue while processing payment ");
+        }
+      }
+    } catch (error) {
+      payBtn.current.disabled = false;
+      alert.error(error.response.data.message);
+    }
+  };
+
+  /*useEffect(() => {
+    if (error) {
+      alert.error(error);
+      dispatch(clearErrors());
+    }
+  }, [dispatch, error, alert]);*/
         const handleCardNumberInput = (e) => {
             setCardNumber(e.target.value);
         };
-    
+        
         const handleCardHolderInput = (e) => {
             setCardHolderName(e.target.value);
         };
@@ -76,7 +178,7 @@ const Payment = () => {
         <h2 style={{marginTop:"5.5rem"}}>Payment of Your Order</h2>
         <img id="formimg" style={{width: "3rem", padding:"2rem", boxSizing: "content-box"}} src={require(`../../img/hand (1).png`)} alt=""
               srcset=""/>
-        <form style={{width: "80%"}}>
+        <form style={{width: "80%"}} onSubmit={submitHandler} >
             <div className="formrows">
                 <div style={{width: "40%", margin: "auto"}} className="formcol">
                     <div className="formlevel">
@@ -133,7 +235,7 @@ const Payment = () => {
             </div>
             <div style={{display: "flex", justifyContent: "center"}} className="formsectionbtn">
             
-              <input  style={{ padding: "0.9rem"}} className="newsectionbtn" type="button" value="Payment Confirm"/>
+              <input style={{ padding: "0.9rem"}} className="newsectionbtn" type="submit" value="Payment Confirm"/>
             
             </div>
         </form>
