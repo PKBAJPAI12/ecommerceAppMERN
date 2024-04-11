@@ -21,13 +21,15 @@ import axios from "axios";
 import Payment from "./components/Cart/Payment";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import {BASE_URL} from "./helper";
+//const stripePromise = loadStripe("pk_test_51OT498SEMCO9ZOkC07dkablECWlvtr3fFhuW5cygOipXndxvmCknxxRVvBIxHykcqzRjLVfW9MttaqT10aQzu2M100fUuKwJAP");
 function App() {
   const { isAuthenticated, user } = useSelector(
     (state) => state.user
   );
   const [stripeApiKey, setStripeApiKey] =useState("");
   async function getStripeApiKey(){
-    const {data}=await axios.get("/api/v1/stripeapikey");
+    const {data}=await axios.get(`/api/v1/stripeapikey`);
     console.log(`data ${data.stripeApiKey}`);
     setStripeApiKey(data.stripeApiKey);
   }
@@ -47,23 +49,31 @@ function App() {
         }
         <Route path="/login" element={<Login />} />
         <Route path="/account" element={<Profile />} />
+        {isAuthenticated &&
         <Route path="/update/profile" element={<UpdateProfile />} />
+        }
+        {isAuthenticated &&
         <Route path="/update/password" element={<UpdatePassword />} />
+        }
         <Route path="/forget/password" element={<ForgetPassword />} />
         <Route path="/password/reset/:token" element={<ResetPassword />} />
         <Route path="/cart" element={<Cart />} />
+        {isAuthenticated &&
         <Route path="/shipping" element={<Shipping/>}/>
+        }
+        {isAuthenticated &&
         <Route path="/order/confirm" element={<Order/>}/>
-        
+        }
+        {isAuthenticated &&
         <Route
           path="/process/payment"
           element={
-            <Elements stripe={loadStripe(stripeApiKey)}>
+            <Elements stripe={stripeApiKey}>
               <Payment />
             </Elements>
           }
         />
-      
+        }
       </Routes>
     </Router>
   );

@@ -7,7 +7,7 @@ router.post('/product/new',isAuthenticatedUser,authorisedRole("admin"),createPro
 router.put('/product/:id',isAuthenticatedUser,authorisedRole("admin"),updateProduct);
 router.delete('/product/:id',isAuthenticatedUser,authorisedRole("admin"),deleteProduct);
 router.get('/product/:id',getProductDetails);
-router.put('/reviews',isAuthenticatedUser,createProductReview);
+router.put('/review',isAuthenticatedUser,createProductReview);
 router.get('/reviews',getProductReviews);
 router.delete('/reviews',isAuthenticatedUser,deleteReview);
 module.exports=router

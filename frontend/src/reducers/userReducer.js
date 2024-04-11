@@ -152,14 +152,6 @@ import {
           loading: false,
           message: action.payload,
         };
-
-  
-      case FORGOT_PASSWORD_FAIL:
-        return {
-          ...state,
-          loading: false,
-          error: action.payload,
-        };
   
       case CLEAR_ERRORS:
         return {

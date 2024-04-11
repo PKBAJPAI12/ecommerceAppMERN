@@ -27,7 +27,7 @@ function Navbar() {
     setShowDashboard(!showDashboard);
   }
   useEffect(()=>{
-    store.dispatch(loadUser());
+    //store.dispatch(loadUser());
   },[])
   return (
     <>

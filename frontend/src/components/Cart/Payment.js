@@ -6,7 +6,7 @@ import CheckoutSteps from "./CheckoutSteps";
 import { useSelector, useDispatch } from "react-redux";
 import { useAlert } from "react-alert";
 import "./Payment.css";
-import { loadStripe } from '@stripe/stripe-js';
+import {BASE_URL} from "../../helper"
 //import { createOrder, clearErrors } from "../../actions/orderActions";
 import {
   CardNumberElement,
@@ -50,7 +50,7 @@ const navigate=useNavigate();
    console.log("submit");
     payBtn.current.disabled = true;
 
-    try {
+    try {   
 
       
       const config = {
@@ -58,8 +58,8 @@ const navigate=useNavigate();
           "Content-Type": "application/json",
         },
       };
-      const { data } = await axios.post(
-        "/api/v1/payment/process",
+      const { data }  = await axios.post(
+        `${BASE_URL}/api/v1/payment/process`,
         paymentData,
         config
       );
@@ -108,13 +108,12 @@ const navigate=useNavigate();
     }
   };
 
-  /*useEffect(() => {
+  /* useEffect(() => {
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
     }
   }, [dispatch, error, alert]);*/
-        
         const handleCardHolderInput = (e) => {
             setCardHolderName(e.target.value);
         };
@@ -165,11 +164,11 @@ const navigate=useNavigate();
                     </div>
                     <CardExpiryElement className="paymentInput" />
                 </div>
-            </div>
+    </div>
             <div style={{display: "flex", justifyContent: "center"}} className="formsectionbtn">
             
               <input style={{ padding: "0.9rem"}} className="newsectionbtn" type="submit" value={`Pay - ₹${orderInfo && orderInfo.total}`} ref={payBtn}/>
-            
+
             </div>
         </form>
       </div>
