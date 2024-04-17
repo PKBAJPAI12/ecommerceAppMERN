@@ -52,10 +52,12 @@ const navigate=useNavigate();
 
     try {   
 
-      
+      const token = localStorage.getItem('token');
+      if(token) {
       const config = {
         headers: {
           "Content-Type": "application/json",
+          'Authorization': `Bearer ${token}`,
         },
       };
       const { data }  = await axios.post(
@@ -99,6 +101,11 @@ const navigate=useNavigate();
         } else {
           alert.error("There's some issue while processing payment ");
         }
+      }
+      }
+      else{
+        alert.error("You are not Authenticate User");
+        navigate("/login");
       }
     } catch (error) {
       payBtn.current.disabled = false;

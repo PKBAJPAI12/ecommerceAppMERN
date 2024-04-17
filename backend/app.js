@@ -7,7 +7,9 @@ const fileUpload=require('express-fileupload')
 const errorMiddleware=require('./middleware/error');
 const dotenv=require('dotenv');
 dotenv.config({path:"backend/.env"});
-app.use(cors());
+app.use(cors({
+    origin: 'https://ecommercemernprateek.netlify.app',
+  }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended:true}));

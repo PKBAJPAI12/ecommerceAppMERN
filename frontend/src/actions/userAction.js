@@ -35,7 +35,8 @@ import {
         { email, password },
         config
       );
-      dispatch({ type: LOGIN_SUCCESS, payload: data });
+      localStorage.setItem('token', data.token);
+      dispatch({ type: LOGIN_SUCCESS, payload: data.user });
     } catch (error) {
       dispatch({ type: LOGIN_FAIL, payload: error.response.data.message });
     }
@@ -60,8 +61,16 @@ import {
   export const loadUser = () => async (dispatch) => {
     try {
       dispatch({ type: LOAD_USER_REQUEST });
-  
-      const { data } = await axios.get(`${BASE_URL}/api/v1/me`);
+      
+      const token = localStorage.getItem('token');
+      console.log(`toki ${token}`)
+      const config = {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+      };
+      console.log(`toki ${JSON.stringify(config)}`)
+      const { data } = await axios.get(`${BASE_URL}/api/v1/me`, config);
   
       dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
     } catch (error) {

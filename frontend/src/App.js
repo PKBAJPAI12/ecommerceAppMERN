@@ -29,9 +29,18 @@ function App() {
   );
   const [stripeApiKey, setStripeApiKey] =useState("");
   async function getStripeApiKey(){
-    const {data}=await axios.get(`/api/v1/stripeapikey`);
+    const token = localStorage.getItem('token');
+    console.log(`tok ${token}`)
+    if(token) {
+      const config = {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      };
+    const {data}=await axios.get(`${BASE_URL}/api/v1/stripeapikey`,config);
     console.log(`data ${data.stripeApiKey}`);
-    setStripeApiKey(data.stripeApiKey);
+    setStripeApiKey(() => loadStripe(data.stripeApiKey));
+    }
   }
   useEffect(()=>{
     store.dispatch(loadUser());
@@ -64,7 +73,7 @@ function App() {
         {isAuthenticated &&
         <Route path="/order/confirm" element={<Order/>}/>
         }
-        {isAuthenticated &&
+        {isAuthenticated && stripeApiKey &&
         <Route
           path="/process/payment"
           element={
