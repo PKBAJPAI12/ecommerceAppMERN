@@ -1,0 +1,58 @@
+name: CI CD
+
+on:
+  push:
+    branches:
+      - main
+      - qa
+      - dev
+  pull_request:
+    branches:
+      - main
+      - qa
+      - dev
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Lint code
+        run: npm run lint
+        continue-on-error: true
+
+      - name: Run tests
+        run: npm run test
+        continue-on-error: true
+
+      - name: Build Project
+        run: npm run build
+
+  deploy:
+    needs: setup
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Deploy to Production
+        uses: johnbeynon/render-deploy-action@v0.0.8
+        with:
+          service-id: ${{ secrets.RENDER_DEV_SERVICE_ID }}
+          api-key: ${{ secrets.RENDER_API_KEY }}
+          wait-for-success: true
