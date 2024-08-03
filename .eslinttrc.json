@@ -1,0 +1,46 @@
+{
+    "extends": "airbnb",
+    "env": {
+      "browser": true,
+      "node": true,
+      "es6": true
+    },
+    "parserOptions": {
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "rules": {
+      "indent": ["error", 4],
+  
+      "semi": ["error", "always"],
+
+      "quotes": ["error", "single"],
+  
+      "no-console": ["error", { "allow": ["warn", "error"] }],
+  
+      "object-curly-spacing": ["error", "always"],
+  
+      "eqeqeq": ["error", "always"],
+  
+      "no-unused-vars": ["error", { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }],
+  
+      "linebreak-style": ["error", "unix"],
+  
+      "max-len": ["error", { "code": 100, "ignoreUrls": true }],
+  
+      "comma-dangle": ["error", "always-multiline"],
+  
+      "space-before-function-paren": ["error", "always"],
+  
+      "space-infix-ops": ["error", { "int32Hint": false }],
+  
+      "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 0 }],
+  
+      
+      "line-comment-position": ["error", { "position": "above" }],
+  
+      "switch-colon-spacing": ["error", { "after": true, "before": false }]
+    }
+  }
+  
