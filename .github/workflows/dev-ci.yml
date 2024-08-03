@@ -3,10 +3,11 @@ name: CI
 on:
   push:
     branches:
-      -dev
+      - dev
   pull_request:
     branches:
-      -dev
+      - dev
+
 jobs:
   setup:
     runs-on: ubuntu-latest
@@ -14,12 +15,12 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
-      
+
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '16'
-      
+
       - name: Install Dependencies
         run: npm install
 
@@ -39,17 +40,12 @@ jobs:
       deployments: write
 
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
       - name: Deploy to Production
         uses: johnbeynon/render-deploy-action@v0.0.8
         with:
-<<<<<<< HEAD
           service-id: ${{ secrets.RENDER_SERVICE_ID }}
           api-key: ${{ secrets.RENDER_API_KEY }}
           wait-for-success: true
-      
-=======
-          service-id: ${{ secrets.RENDER_DEV_SERVICE_ID }}
-          api-key: ${{ secrets.RENDER_API_KEY }}
-          wait-for-success: true
-      
->>>>>>> 347b27c4bd29fec2e743c457cd36e59587b22bd9
