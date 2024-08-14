@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import MetaData from "../MetaData";
 import Navbar from "../navbar";
 import Footer from "../footer";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   forgotPassword,

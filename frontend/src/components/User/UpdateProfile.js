@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import MetaData from "../MetaData";
 import Navbar from "../navbar";
 import Footer from "../footer";
-import { Link,useNavigate } from "react-router-dom";
+import { Link,useHistory } from "react-router-dom";
 import { useSelector,useDispatch } from "react-redux";
 import { updateProfile,loadUser,clearErrors } from "../../actions/userAction";
 import { UPDATE_PROFILE_RESET } from "../../constants/userConstants";
 import { useAlert } from "react-alert";
 const UpdateProfile = () => {
     const dispatch=useDispatch();
-    const navigate=useNavigate();
+    const navigate=useHistory();
     const alert = useAlert();
   const { user } = useSelector((state) => state.user);
   const { error, isUpdated, loading } = useSelector((state) => state.profile);
@@ -50,7 +50,7 @@ const UpdateProfile = () => {
           alert.success("Profile Updated Successfully");
           dispatch(loadUser());
     
-          navigate("/account");
+          navigate.push("/account");
     
           dispatch({
             type: UPDATE_PROFILE_RESET,

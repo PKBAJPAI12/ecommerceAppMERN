@@ -10,11 +10,11 @@ import PhoneIcon from "@material-ui/icons/Phone";
 import TransferWithinAStationIcon from "@material-ui/icons/TransferWithinAStation";
 import CheckoutSteps from "./CheckoutSteps";
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 const Order = () => {
     const { cartItems,shippingInfo } = useSelector((state) => state.cart);
     const { user } = useSelector((state) => state.user);
-    const navigate=useNavigate();
+    const navigate=useHistory();
     const subtotal = cartItems.reduce(
         (sum, item) => sum + item.quantity * item.price,
         0
@@ -36,7 +36,7 @@ const Order = () => {
     
         sessionStorage.setItem("orderInfo", JSON.stringify(data));
     
-        navigate("/process/payment");
+        navigate.push("/process/payment");
       };
   return (
     <>

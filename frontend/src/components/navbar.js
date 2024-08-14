@@ -5,10 +5,10 @@ import store from "../store";
 import {loadUser,logout} from '../actions/userAction';
 import { useSelector,useDispatch } from "react-redux";
 import { useAlert } from "react-alert";
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 function Navbar() {
   const dispatch = useDispatch();
-  const navigate=useNavigate();
+  const navigate=useHistory();
   const alert=useAlert();
   const [showDashboard,setShowDashboard]=useState(false);
   const { isAuthenticated, user } = useSelector(
@@ -20,7 +20,7 @@ function Navbar() {
       console.log("Logout action dispatched");
       alert.success("Logout Successfully");
       console.log("Navigating to login page");
-      navigate('/login');
+      navigate.push('/login');
     });
 }
   function toggleDashboard() {

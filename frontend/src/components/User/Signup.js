@@ -6,11 +6,11 @@ import { Link } from "react-router-dom";
 import { useDispatch,useSelector} from "react-redux";
 import { useAlert } from "react-alert";
 import { clearErrors, register } from "../../actions/userAction";
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 const Signup = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
-  const navigate=useNavigate();
+  const navigate=useHistory();
   const {isAuthenticated } = useSelector(
     (state) => state.user
   );
@@ -27,7 +27,7 @@ const Signup = () => {
   console.log(`password ${password}`)
   useEffect(() => {
     if (isAuthenticated) {
-      navigate(`/account`);
+      navigate.push(`/account`);
       alert.success("Login Successfully")
     }
   }, [dispatch, navigate, isAuthenticated]);
