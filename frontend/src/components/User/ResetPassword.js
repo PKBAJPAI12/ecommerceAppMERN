@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import MetaData from "../MetaData";
 import Navbar from "../navbar";
 import Footer from "../footer";
-import { Link, useNavigate,useParams } from "react-router-dom";
+import { Link, useHistory,useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   resetPassword,
@@ -13,7 +13,7 @@ import { useAlert } from "react-alert";
 const ResetPassword = () => {
   const dispatch=useDispatch();
   const alert = useAlert();
-  const navigate=useNavigate();
+  const navigate=useHistory();
   const { error, success, loading } = useSelector(
     (state) => state.forgotPassword
   );
@@ -38,7 +38,7 @@ const ResetPassword = () => {
     if (success) {
       alert.success("Password Updated Successfully");
 
-      navigate("/account");
+      navigate.push("/account");
     }
   }, [dispatch, error, alert, navigate, success]);
   return (

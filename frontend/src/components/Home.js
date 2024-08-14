@@ -50,8 +50,8 @@ function Home() {
           <h1 style={{fontSize:"3.5rem"}}> Make You Different</h1>
           <div className="leftsectionh5">
             <h5>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore
-              excepturi enim ea deleniti reprehenderit aspernatur!{" "}
+              Lorem ipsum dolor sit amet consectetur, Lorem ipsum adipisicing elit. Tempore
+              excepturi enim ea deleniti reprehenderit aspernatur!
             </h5>
           </div>
           <div>
