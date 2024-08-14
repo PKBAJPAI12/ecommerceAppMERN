@@ -62,14 +62,4 @@ jobs:
       - name: Deploy Frontend to Netlify
         run: |
           npm install -g netlify-cli
-          netlify deploy --dir=frontend/build --site ${{ secrets.NETLIFY_SITE_ID }} --auth ${{ secrets.NETLIFY_API_TOKEN }} --prod
-
-      - name: Generate URL Preview
-        id: url_preview
-        run: |
-          netlify deploy --dir=frontend/build --site ${{ secrets.NETLIFY_SITE_ID }} --auth ${{ secrets.NETLIFY_API_TOKEN }} > deploy_output.json
-          NETLIFY_PREVIEW_URL=$(jq -r '.deploy_url' deploy_output.json)
-          echo "NETLIFY_PREVIEW_URL=$NETLIFY_PREVIEW_URL" >> "$GITHUB_ENV"
-
-      - name: Debug Preview URL
-        run: echo ${{ env.NETLIFY_PREVIEW_URL }}
+          netlify deploy --dir=frontend/build --site ${{ secrets.NETLIFY_SITE_ID }} --auth ${{ secrets.NETLIFY_API_TOKEN }}
