@@ -35,6 +35,7 @@ import {
         { email, password },
         config
       );
+      console.log('data',data);
       localStorage.setItem('token', data.token);
       dispatch({ type: LOGIN_SUCCESS, payload: data.user });
     } catch (error) {
@@ -48,7 +49,7 @@ import {
       console.log(userData);
       const config = { headers: { "Content-Type": "multipart/form-data" } }
       const { data } = await axios.post(`${BASE_URL}/api/v1/register`, userData, config);
-      console.log(data);
+      console.log('data',data);
       dispatch({ type: REGISTER_USER_SUCCESS, payload: data.user });
     } catch (error) {
       dispatch({
