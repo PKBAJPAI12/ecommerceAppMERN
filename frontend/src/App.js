@@ -39,6 +39,7 @@ function App() {
   }
 
   useEffect(() => {
+    console.log("Loading check...");
     store.dispatch(loadUser());
     getStripeApiKey();
   }, []);
@@ -50,7 +51,7 @@ function App() {
         <Route path="/products" exact component={Products} />
         <Route path="/products/:keyword" component={Products} />
         <Route path="/product/:id" component={ProductDetails} />
-        {!isAuthenticated && <Route path="/signup" component={Signup} />}
+        <Route path="/signup" component={Signup} />
         <Route path="/login" component={Login} />
         <Route path="/account" component={Profile} />
         {isAuthenticated && <Route path="/update/profile" component={UpdateProfile} />}

@@ -8,7 +8,7 @@ const errorMiddleware=require('./middleware/error');
 const dotenv=require('dotenv');
 dotenv.config({path:"backend/.env"});
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: '*',
   }));
 app.use(express.json());
 app.use(cookieParser());

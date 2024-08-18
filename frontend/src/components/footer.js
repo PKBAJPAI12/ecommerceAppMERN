@@ -78,7 +78,7 @@ function Footer() {
             paddingTop: "0.6rem",
           }}
         >
-          &#169; 2022 Superior Clothing Brand All Right Reserved
+          &#169; 2024 Superior Clothing Brand All Right Reserved
         </p>
       </div>
     </>
