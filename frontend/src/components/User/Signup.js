@@ -2,15 +2,14 @@ import React, { useState,useEffect } from "react";
 import MetaData from "../MetaData";
 import Navbar from '../navbar';
 import Footer from "../footer";
-import { Link } from "react-router-dom";
-import { useDispatch,useSelector} from "react-redux";
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
-import { clearErrors, register } from "../../actions/userAction";
-import { useHistory } from "react-router-dom";
+import { clearErrors, loadUser, register } from "../../actions/userAction";
 const Signup = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
-  const navigate=useHistory();
+  const history = useHistory();
   const {isAuthenticated } = useSelector(
     (state) => state.user
   );
@@ -22,23 +21,20 @@ const Signup = () => {
   const { name, email, password } = user;
   const [avatar, setAvatar] = useState("/Profile.png");
   const [avatarPreview, setAvatarPreview] = useState("/Profile.png");
-  console.log(`name ${name}`)
-  console.log(`email ${email}`)
-  console.log(`password ${password}`)
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate.push(`/account`);
-      alert.success("Login Successfully")
-    }
-  }, [dispatch, navigate, isAuthenticated]);
-  const signupSubmit = (e) => {
+  const signupSubmit = async (e) => {
     e.preventDefault();
     const myForm = new FormData();
     myForm.set("name", name);
     myForm.set("email", email);
     myForm.set("password", password);
     myForm.set("avatar", avatar);
-    dispatch(register(myForm));
+    await dispatch(register(myForm));
+    setTimeout(() => {
+      if (isAuthenticated) {
+        history.push('/account');
+        alert.success("Login Successfully");
+      }
+    }, 8000);
     console.log("done");
   };
   const inputHandler = (e) => {
@@ -57,6 +53,20 @@ const Signup = () => {
       setUser({ ...user, [e.target.name]: e.target.value });
     }
   };
+  // useEffect(() => {
+  //   console.log("Loading user...");
+  //   dispatch(loadUser());
+  // }, [dispatch]);
+  
+  useEffect(() => {
+    console.log("isAuthenticated changed:", isAuthenticated);
+    if (isAuthenticated) {
+      history.push('/account');
+      alert.success("Login Successfully");
+    }
+  }, [isAuthenticated, history, alert]);
+  
+  console.log('authenticate',isAuthenticated)
   return (
     <>
     <MetaData title="Ecommerce-Signup" />
