@@ -46,25 +46,7 @@ body{
   background-color: ghostwhite;
 }
 
-.navbar{
-  display: flex;
-  margin-left: 5rem;
-  margin-right: 5rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-.navleft{
-  width: 35%;
-}
-.navcenter{
-  width: 25%;
-  display: flex;
-  justify-content: center;
-  margin: auto;
-  align-items: center;
-}
 .navright{
-  width: 40%;
   display: flex;
   flex-direction: row-reverse;
   margin: auto;
@@ -83,21 +65,62 @@ body{
 .navright ul li a{
   text-decoration: none;
 }
-.navleft ul{
-  display: flex;
-  align-items: center;
-  list-style: none;
-
+@media (min-width: 926px){
+  .navbar{
+    display: flex;
+    margin-left: 5rem;
+    margin-right: 5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .navleft ul{
+    display: flex;
+    align-items: center;
+    list-style: none;
+  
+  }
+  
+  .navleft ul li{
+    list-style: none;
+    font-size: 1rem;
+    color: blue;
+    padding-left:0.5rem;
+  }
+  .navleft ul li a{
+    text-decoration: none;
+  }
+  .navcenter{
+    display: flex;
+    margin: auto;
+    align-items: center;
+  }
 }
-
-.navleft ul li{
-  list-style: none;
-  font-size: 1rem;
-  color: blue;
-  padding-left:0.5rem ;
-}
-.navleft ul li a{
-  text-decoration: none;
+@media (max-width: 925px){
+  .navleft {
+    padding-top: 1rem;
+    padding-left: 2rem;
+  }
+  .navleft ul{
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    margin-left:3rem;
+  }
+  
+  .navleft ul li{
+    list-style: none;
+    font-size: 1rem;
+    color: blue;
+    padding: 0.5rem;
+  }
+  .navleft ul li a{
+    text-decoration: none;
+  }
+  .hamburger {
+    border-bottom: 2px solid darkviolet;
+    width: 2rem;
+    margin-bottom: 5px;
+  }
 }
 .servicesection{
   display: flex;
@@ -131,7 +154,7 @@ body{
   border: 1px solid grey;
   border-radius: 0.8rem;
   display: flex;
-  padding:0.2rem;
+  padding:0.1rem;
   height: 2rem;
   background-color: #ffffff;
 }

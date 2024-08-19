@@ -11,6 +11,10 @@ function Navbar() {
   const navigate=useHistory();
   const alert=useAlert();
   const [showDashboard,setShowDashboard]=useState(false);
+  const [isBrandTitle, setIsBrandTitle] = useState(window.innerWidth > 1200);
+  const [isBrandLogo, setIsBrandLogo] = useState(window.innerWidth > 1050);
+  const [isMobile, setIsMobile] = useState(window.innerWidth > 925);
+  const [isOpen, setIsOpen] = useState(false);
   const { isAuthenticated, user } = useSelector(
     (state) => state.user
   );
@@ -28,12 +32,27 @@ function Navbar() {
   }
   useEffect(()=>{
     //store.dispatch(loadUser());
-  },[])
+    const handleResize = () => {
+      setIsBrandTitle(window.innerWidth > 1200);
+      setIsBrandLogo(window.innerWidth > 1050);
+      setIsMobile(window.innerWidth > 925);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup the event listener on component unmount
+    return () => window.removeEventListener('resize', handleResize);
+  })
   return (
     <>
-      <div className="circle7"></div>
+      {isOpen ? (
+        <div className="circle7" style={{top:"13rem"}}></div>
+      ): (
+        <div className="circle7"></div>
+      )}
       <div className="navbar">
         <div className="navleft">
+          {isMobile? (
           <ul className="navleftul">
             <li style={{ paddingRight: "0rem" }}>
               <img
@@ -59,16 +78,63 @@ function Navbar() {
               <Link to="/">Kids</Link>{" "}
             </li>
           </ul>
+          ):(
+            <>
+            {isOpen ? (
+              <div style={{display:"flex"}}>
+              <img
+                onClick={()=>setIsOpen(!isOpen)}
+                style={{ width: "1rem", height:"1rem", marginTop: "10px"}}
+                src={require(`../img/x.png`)}
+                alt=""
+                srcSet=""
+              />
+              <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/products">Collections</Link>
+            </li>
+            <li>
+              <Link to="/">Men</Link>
+            </li>
+            <li>
+              <Link to="/">Women</Link>
+            </li>
+            <li>
+              <Link to="/">Kids</Link>{" "}
+            </li>
+            </ul>
+            </div>
+            ): (
+              <div onClick={()=>setIsOpen(!isOpen)}>
+            <div className="hamburger"></div>
+            <div className="hamburger"></div>
+            <div className="hamburger"></div>
+            </div>
+            )}
+            </>
+          )}
         </div>
-        <div className="navcenter">
+        {isMobile ? (
+          <div className="navcenter">
+        {isBrandLogo &&
           <img
             style={{ width: "3rem", marginRight: "1rem" }}
             src={require(`../img/shopping-store.png`)}
             alt=""
           />
-          <h2 className="">Superior</h2>
+        }
+          {isBrandTitle &&
+            <h2 className="">Superior</h2>
+          }
         </div>
-        <div className="navright">
+        ): (
+          <></>
+        )}
+        {isMobile ? (
+          <div className="navright">
           <ul>
           {isAuthenticated ? (
               <>
@@ -129,6 +195,9 @@ function Navbar() {
           </ul>
           <Search />
         </div>
+        ):(
+          <></>
+        )}
       </div>
     </>
   );

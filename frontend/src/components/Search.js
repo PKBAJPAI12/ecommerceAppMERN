@@ -31,7 +31,7 @@ const Search = () => {
           />
         </div>
         <input
-          style={{ borderColor: "transparent", color: "black" }}
+          style={{ borderColor: "transparent", color: "black", width: "9rem" }}
           type="text"
           placeholder="Search a Product"
           name="trans"
