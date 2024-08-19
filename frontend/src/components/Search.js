@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-const Search = () => {
+const Search = ({ isBrandLogo }) => {
   const navigate = useHistory();
   const [keyword, setKeyword] = useState("");
 
   const searchHandler = (e) => {
     e.preventDefault();
     if (keyword.trim()) {
-        navigate.push(`/products/${keyword}`);
+      navigate.push(`/products/${keyword}`);
     } else {
-        navigate.push(`/products`);
+      navigate.push(`/products`);
     }
   };
 
@@ -31,7 +31,11 @@ const Search = () => {
           />
         </div>
         <input
-          style={{ borderColor: "transparent", color: "black", width: "9rem" }}
+          style={{
+            borderColor: "transparent",
+            color: "black",
+            width: isBrandLogo ? "8rem" : "6.5rem",
+          }}
           type="text"
           placeholder="Search a Product"
           name="trans"
