@@ -4,10 +4,10 @@ import Navbar from '../navbar'
 import MetaData from '../MetaData'
 import { useSelector, useDispatch } from "react-redux";
 import { addItemsToCart, removeItemsFromCart } from "../../actions/cartActions";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 const Cart = () => {
     const dispatch = useDispatch();
-    const navigate=useNavigate();
+    const navigate=useHistory();
   const { cartItems } = useSelector((state) => state.cart);
   const { isAuthenticated } = useSelector((state) => state.user);
   const increaseQuantity = (id, quantity, stock) => {
@@ -30,9 +30,9 @@ const Cart = () => {
   };
   const checkoutHandler = () => {
     if(isAuthenticated){
-        navigate("/shipping");
+        navigate.push("/shipping");
     }else{
-        navigate("/login");
+        navigate.push("/login");
     }
   };
   const subtotal = cartItems.reduce(

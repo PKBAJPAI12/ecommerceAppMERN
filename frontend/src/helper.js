@@ -1,1 +1,1 @@
-export const BASE_URL="https://mern-backend-8is5.onrender.com"
+export const BASE_URL="https://ecommerceappmern-gmfs.onrender.com"

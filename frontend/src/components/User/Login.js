@@ -6,11 +6,11 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, login } from "../../actions/userAction";
 import { useAlert } from "react-alert";
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 const Login = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
-  const navigate = useNavigate();
+  const navigate = useHistory();
   const [email,setEmail]=useState("");
   const [password,setPassword]=useState("");
   const { error, loading, isAuthenticated,user } = useSelector(
@@ -29,10 +29,10 @@ const Login = () => {
 
     if (isAuthenticated) {
       if(user.role==="admin"){
-        navigate(`/dashboard/admin`);
+        navigate.push(`/dashboard/admin`);
         alert.success("Login Successfully")
       }else{
-        navigate(`/account`);
+        navigate.push(`/account`);
         alert.success("Login Successfully")
       }
     }

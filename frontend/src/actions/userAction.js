@@ -35,6 +35,7 @@ import {
         { email, password },
         config
       );
+      console.log('data',data);
       localStorage.setItem('token', data.token);
       dispatch({ type: LOGIN_SUCCESS, payload: data.user });
     } catch (error) {
@@ -48,8 +49,10 @@ import {
       console.log(userData);
       const config = { headers: { "Content-Type": "multipart/form-data" } }
       const { data } = await axios.post(`${BASE_URL}/api/v1/register`, userData, config);
-      console.log(data);
+      console.log('data',data);
+      localStorage.setItem('token', data.token);
       dispatch({ type: REGISTER_USER_SUCCESS, payload: data.user });
+      console.log('users',data);
     } catch (error) {
       dispatch({
         type: REGISTER_USER_FAIL,
@@ -69,7 +72,7 @@ import {
           'Authorization': `Bearer ${token}`
         },
       };
-      console.log(`toki ${JSON.stringify(config)}`)
+      console.log(`loadtoki ${JSON.stringify(config)}`)
       const { data } = await axios.get(`${BASE_URL}/api/v1/me`, config);
   
       dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
@@ -81,7 +84,7 @@ import {
   export const logout = () => async (dispatch) => {
     try {
       await axios.get(`${BASE_URL}/api/v1/logout`);
-  
+      localStorage.removeItem('token');
       dispatch({ type: LOGOUT_SUCCESS });
     } catch (error) {
       dispatch({ type: LOGOUT_FAIL, payload: error.response.data.message });

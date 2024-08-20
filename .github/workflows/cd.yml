@@ -1,16 +1,12 @@
-name: CI CD
+name: Deployment Production
 
 on:
   push:
     branches:
       - main
-      - qa
-      - dev
   pull_request:
     branches:
       - main
-      - qa
-      - dev
 
 jobs:
   setup:
@@ -50,9 +46,20 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Deploy to Production
+      - name: Deploy Backend to Render
         uses: johnbeynon/render-deploy-action@v0.0.8
         with:
           service-id: ${{ secrets.RENDER_MAIN_SERVICE_ID }}
           api-key: ${{ secrets.RENDER_API_KEY }}
           wait-for-success: true
+
+      - name: Build Frontend
+        run: |
+          cd frontend
+          npm install
+          npm run build
+
+      - name: Deploy Frontend to Netlify
+        run: |
+          npm install -g netlify-cli
+          netlify deploy --dir=frontend/build --site ${{ secrets.NETLIFY_SITE_ID }} --auth ${{ secrets.NETLIFY_API_TOKEN }} --prod
