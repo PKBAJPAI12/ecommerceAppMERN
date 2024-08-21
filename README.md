@@ -13,8 +13,8 @@ Note: Some areas of the project are still missing features and need improvements
 - [Usage](#usage)
 - [API Testing](#api-testing)
 - [Deployment](#deployment)
-- [License](#license)
 - [Contact](#contact)
+- [Upcoming Improvement](#upcoming-improvement)
 
 ## Features
 
@@ -146,12 +146,19 @@ This project uses **Jest** for API testing to ensure that all backend routes and
    npm test
    ```
 
+Here's the updated `Deployment` section with placeholders for the Render and Netlify deployment links:
+
+---
+
 ## Deployment
 
-This project is deployed using Netlify (frontend) and Render (backend). The CI/CD pipeline is set up with GitHub Actions to automate the deployment process.
+This project is deployed using Netlify for the frontend and Render for the backend. The CI/CD pipeline is set up with GitHub Actions to automate the deployment process.
 
-- **Frontend:** Automatically deployed on Netlify upon commits to the `main` `qa` `dev` branch.
-- **Backend:** Automatically deployed on Render upon commits to the `main` `qa` `dev` branch.
+- **Frontend:** The application is automatically deployed on Netlify upon commits to the `main` `qa` `dev` branch. You can view the live site here: [Netlify Deployment](https://ecommerceapplicationqa.netlify.app/).
+  
+- **Backend:** The server is automatically deployed on Render upon commits to the `main` `qa` `dev` branch. You can access the backend API here: [Render Deployment](https://mern-backend-8is5.onrender.com).
+
+Replace the placeholder links with your actual deployment URLs. This will allow users to easily access the live application and API endpoints.
 
 ## Contact
 
