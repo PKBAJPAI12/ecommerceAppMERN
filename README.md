@@ -156,7 +156,7 @@ This project is deployed using Netlify for the frontend and Render for the backe
 
 - **Frontend:** The application is automatically deployed on Netlify upon commits to the `main` `qa` `dev` branch. You can view the live site here: [Netlify Deployment](https://ecommerceapplicationqa.netlify.app/).
   
-- **Backend:** The server is automatically deployed on Render upon commits to the `main` `qa` `dev` branch. You can access the backend API here: [Render Deployment](https://mern-backend-8is5.onrender.com).
+- **Backend:** The server is automatically deployed on Render upon commits to the `main` `qa` `dev` branch. You can access the backend API here: [Render Deployment](https://mern-backend-8is5.onrender.com/api/v1/products).
 
 Replace the placeholder links with your actual deployment URLs. This will allow users to easily access the live application and API endpoints.
 
