@@ -146,10 +146,6 @@ This project uses **Jest** for API testing to ensure that all backend routes and
    npm test
    ```
 
-Here's the updated `Deployment` section with placeholders for the Render and Netlify deployment links:
-
----
-
 ## Deployment
 
 This project is deployed using Netlify for the frontend and Render for the backend. The CI/CD pipeline is set up with GitHub Actions to automate the deployment process.
