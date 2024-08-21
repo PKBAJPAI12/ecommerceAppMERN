@@ -16,7 +16,7 @@ import {
     useElements,
   } from '@stripe/react-stripe-js';
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 const Payment = () => {
   const [cardHolderName,setCardHolderName]=useState("Card Holder Name");
   const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
@@ -27,7 +27,7 @@ const Payment = () => {
   const stripe = useStripe();
   const elements = useElements();
   const payBtn = useRef(null);
-const navigate=useNavigate();
+const navigate=useHistory();
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.user);
   //const { error } = useSelector((state) => state.newOrder);
@@ -97,7 +97,7 @@ const navigate=useNavigate();
 
          // dispatch(createOrder(order));
 
-          navigate("/success");
+          navigate.push("/success");
         } else {
           alert.error("There's some issue while processing payment ");
         }
@@ -105,7 +105,7 @@ const navigate=useNavigate();
       }
       else{
         alert.error("You are not Authenticate User");
-        navigate("/login");
+        navigate.push("/login");
       }
     } catch (error) {
       payBtn.current.disabled = false;

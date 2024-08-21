@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Brand from "./Brand";
 import MetaData from "./MetaData";
 import Navbar from './navbar';
 import Footer from "./footer";
 function Home() {
+    const [isTablet,setIsTable] =useState(window.innerWidth > 1050);
     let brands=[
         {
             image:"deal-page-467x316-levis1.jpg",
@@ -30,6 +31,16 @@ function Home() {
             discount:25
         }
     ]
+    useEffect(()=>{
+      const handleResize = () => {
+        setIsTable(window.innerWidth > 1050);
+      };
+  
+      window.addEventListener("resize", handleResize);
+  
+      // Cleanup the event listener on component unmount
+      return () => window.removeEventListener("resize", handleResize);
+    })
   return (
     <>
       <MetaData title="Ecommerce-Home Page" />
@@ -40,18 +51,18 @@ function Home() {
             New Age Collection's
           </h3>
           <div className="leftsectionh1">
-            <h1 style={{fontSize:"3.5rem"}}>Superior will</h1>
+            <h1 style={{fontSize: isTablet ? "3rem":"2.5rem"}}>Superior will</h1>
             <img
               style={{width:"4rem", marginLeft: "1rem"}}
               src={require("../img/flat-design-people-4682770__340.webp")}
               alt=""
             />
           </div>
-          <h1 style={{fontSize:"3.5rem"}}> Make You Different</h1>
+          <h1 style={{fontSize:isTablet ? "3rem":"2.5rem"}}> Make You Different</h1>
           <div className="leftsectionh5">
             <h5>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore
-              excepturi enim ea deleniti reprehenderit aspernatur!{" "}
+              Lorem ipsum dolor sit amet consectetur, Lorem ipsum adipisicing elit. Tempore
+              excepturi enim ea deleniti reprehenderit aspernatur!
             </h5>
           </div>
           <div>
@@ -66,11 +77,11 @@ function Home() {
           </div>
         </div>
         <div className="rightsection">
-          <div id="circle1"></div>
-          <div id="circle2"></div>
-          <div id="circle3"></div>
+          <div id="circle1" style={{width: isTablet?"10rem":"8rem",height: isTablet?"10rem":"8rem", left:isTablet?"56%":"60%"}}></div>
+          <div id="circle2" style={{width: isTablet?"12rem":"10rem",height: isTablet?"12rem":"10rem"}}></div>
+          <div id="circle3" style={{width: isTablet?"10rem":"8rem",height: isTablet?"10rem":"8rem"}}></div>
           <img
-            style={{position: "relative", left:"6rem", zIndex: "1", width:"20rem"}}
+            style={{position: "relative", left:"6rem", zIndex: "1", width:isTablet ?"20rem":"17rem"}}
             src={require("../img/online-shopping-for-women-gcf940d030_1280-removebg-preview.png")}
             alt=""
           />
