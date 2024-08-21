@@ -162,8 +162,6 @@ For any inquiries or issues, feel free to contact me:
 - **Email:** prateek.cse.uiet@gmail.com
 - **LinkedIn:** [Your LinkedIn Profile](https://www.linkedin.com/in/prateek-bajpai-0662941bb/)
 
-Here's the updated `README.md` with a section on upcoming improvements, including details on the current problems and ongoing work:
-
 ## Upcoming Improvements
 
 - **Jest Test Cases:** Currently facing issues with test cases failing unexpectedly. Working on resolving these issues to ensure robust testing coverage.
