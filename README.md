@@ -158,7 +158,6 @@ This project is deployed using Netlify for the frontend and Render for the backe
   
 - **Backend:** The server is automatically deployed on Render upon commits to the `main` `qa` `dev` branch. You can access the backend API here: [Render Deployment](https://mern-backend-8is5.onrender.com/api/v1/products).
 
-Replace the placeholder links with your actual deployment URLs. This will allow users to easily access the live application and API endpoints.
 
 ## Contact
 
