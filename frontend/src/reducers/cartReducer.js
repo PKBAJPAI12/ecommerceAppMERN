@@ -9,7 +9,7 @@ import {
     action
   ) => {
     switch (action.type) {
-      case ADD_TO_CART:
+      case ADD_TO_CART: {
         const item = action.payload;
   
         const isItemExist = state.cartItems.find(
@@ -29,7 +29,7 @@ import {
             cartItems: [...state.cartItems, item],
           };
         }
-  
+      }
       case REMOVE_CART_ITEM:
         return {
           ...state,

@@ -11,7 +11,7 @@ const options = {
   position: positions.BOTTOM_CENTER,
   transition: transitions.SCALE,
 };
-
+/* eslint-disable-next-line react/no-deprecated */
 ReactDOM.render(
   <Provider store={store}>
     <AlertProvider template={AlertTemplate} {...options}>

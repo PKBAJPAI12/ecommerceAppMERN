@@ -137,20 +137,20 @@ const navigate=useHistory();
          className="formsection">
         <h2 style={{marginTop:"5.5rem"}}>Payment of Your Order</h2>
         <img id="formimg" style={{width: "3rem", padding:"2rem", boxSizing: "content-box"}} src={require(`../../img/hand (1).png`)} alt=""
-              srcset=""/>
+              srcSet=""/>
 
         <form style={{width: "80%"}} onSubmit={(e) => submitHandler(e)} >
             <div className="formrows">
                 <div style={{width: "40%", margin: "auto"}} className="formcol">
                     <div className="formlevel">
-                        <img style={{width: "2rem", marginRight:"1rem"}} src={require(`../../img/pin-number.png`)} alt=""  srcset=""/>
+                        <img style={{width: "2rem", marginRight:"1rem"}} src={require(`../../img/pin-number.png`)} alt=""  srcSet=""/>
                         <label>Card Number</label>
                     </div>
                     <CardNumberElement className="paymentInput" />
                 </div>
                 <div style={{width: "40%", margin: "auto"}} className="formcol">
                     <div className="formlevel">
-                        <img style={{width: "2rem", marginRight:"1rem"}} src={require(`../../img/user (2).png`)} alt=""  srcset=""/>
+                        <img style={{width: "2rem", marginRight:"1rem"}} src={require(`../../img/user (2).png`)} alt=""  srcSet=""/>
                         <label>Card Holder Name</label>
                     </div>
                     <input onInput={handleCardHolderInput} type="text" className="form-control card-holder-input paymentInput" placeholder="Enter Card Holder Name"/>
@@ -159,14 +159,14 @@ const navigate=useHistory();
             <div className="formrows">
                 <div style={{width: "40%", margin: "auto"}} className="formcol">
                     <div className="formlevel">
-                        <img style={{width: "2rem", marginRight:"1rem"}} src={require(`../../img/cvv.png`)} alt=""  srcset=""/>
+                        <img style={{width: "2rem", marginRight:"1rem"}} src={require(`../../img/cvv.png`)} alt=""  srcSet=""/>
                         <label>CVV</label>
                     </div>
                     <CardCvcElement className="paymentInput" />
                 </div>
                 <div style={{width: "40%", margin: "auto"}} className="formcol">
                     <div className="formlevel">
-                        <img style={{width: "2rem", marginRight:"1rem"}} src={require(`../../img/calendar.png`)} alt=""  srcset=""/>
+                        <img style={{width: "2rem", marginRight:"1rem"}} src={require(`../../img/calendar.png`)} alt=""  srcSet=""/>
                         <label>Card Expiry Date</label>
                     </div>
                     <CardExpiryElement className="paymentInput" />

@@ -72,7 +72,7 @@ const UpdatePassword = () => {
                   style={{ width: "2rem", marginRight: "1rem" }}
                   src={require(`../../img/lock (1).png`)}
                   alt=""
-                  srcset=""
+                  srcSet=""
                 />
                 <label>Old Password</label>
               </div>
@@ -97,7 +97,7 @@ const UpdatePassword = () => {
                   style={{ width: "2rem", marginRight: "1rem" }}
                   src={require(`../../img/lock (1).png`)}
                   alt=""
-                  srcset=""
+                  srcSet=""
                 />
                 <label>New Password</label>
               </div>
@@ -122,7 +122,7 @@ const UpdatePassword = () => {
                   style={{ width: "2rem", marginRight: "1rem" }}
                   src={require(`../../img/lock (1).png`)}
                   alt=""
-                  srcset=""
+                  srcSet=""
                 />
                 <label>Confirm Password</label>
               </div>

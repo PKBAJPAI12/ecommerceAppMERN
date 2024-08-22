@@ -95,22 +95,22 @@ const Cart = () => {
                         )
                       }>+</button></td>
                       <td style={{fontSize: "1.1rem", textAlign: "center"}}>{item.quantity*item.price}</td>
-                                        <td style={{display: "flex", justifyContent: "center", paddingBottom: "1.5rem"}}><button style={{padding: "0.5rem", borderRadius: "0.7rem", color: "blue", background: "linear-gradient(45deg,red,white)"}} onClick={() => deleteCartItems(item.product)} class="">Remove</button></td>
+                                        <td style={{display: "flex", justifyContent: "center", paddingBottom: "1.5rem"}}><button style={{padding: "0.5rem", borderRadius: "0.7rem", color: "blue", background: "linear-gradient(45deg,red,white)"}} onClick={() => deleteCartItems(item.product)} className="">Remove</button></td>
                                     </tr>
                                     ))
                                     }
                                    </table> 
                                    <div>
-                                        <p style={{fontSize: "1.3rem"}} colspan="5" class="text-right font-weight-bold m-5">
+                                        <p style={{fontSize: "1.3rem"}} colSpan="5" className="text-right font-weight-bold m-5">
                                             Sub Total Price: RS.{subtotal}
                                         </p>                                  
-                                        <p style={{fontSize: "1.3rem"}} colspan="5" class="text-right font-weight-bold m-5">
+                                        <p style={{fontSize: "1.3rem"}} colSpan="5" className="text-right font-weight-bold m-5">
                                             GST: RS.{gst}
                                         </p>                
-                                        <p style={{fontSize: "1.3rem"}} colspan="5" class="text-right font-weight-bold m-5">
+                                        <p style={{fontSize: "1.3rem"}} colSpan="5" className="text-right font-weight-bold m-5">
                                             Delivery Charge: RS.{shippingCharge}
                                         </p>                               
-                                        <p style={{fontSize: "1.3rem"}} colspan="5" class="text-right font-weight-bold m-5">
+                                        <p style={{fontSize: "1.3rem"}} colSpan="5" className="text-right font-weight-bold m-5">
                                             Total Price: RS.{total}
                                         </p>
                                    </div>
