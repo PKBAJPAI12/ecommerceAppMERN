@@ -80,16 +80,16 @@ const Order = () => {
            </table> 
            <div>
                 <h3>Order Summary</h3>
-                <p style={{fontSize: "1.3rem"}} colspan="5" class="text-right font-weight-bold m-5">
+                <p style={{fontSize: "1.3rem"}} colSpan="5" className="text-right font-weight-bold m-5">
                     Sub Total Price: RS.{subtotal}
                 </p>                                  
-                <p style={{fontSize: "1.3rem"}} colspan="5" class="text-right font-weight-bold m-5">
+                <p style={{fontSize: "1.3rem"}} colSpan="5" className="text-right font-weight-bold m-5">
                     GST: RS.{gst}
                 </p>                
-                <p style={{fontSize: "1.3rem"}} colspan="5" class="text-right font-weight-bold m-5">
+                <p style={{fontSize: "1.3rem"}} colSpan="5" className="text-right font-weight-bold m-5">
                     Delivery Charge: RS.{shippingCharge}
                 </p>                               
-                <p style={{fontSize: "1.3rem"}} colspan="5" class="text-right font-weight-bold m-5">
+                <p style={{fontSize: "1.3rem"}} colSpan="5" className="text-right font-weight-bold m-5">
                     Total Price: RS.{total}
                 </p>
            </div>

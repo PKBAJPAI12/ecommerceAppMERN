@@ -69,7 +69,7 @@ const ResetPassword = () => {
                   style={{ width: "2rem", marginRight: "1rem" }}
                   src={require(`../../img/lock (1).png`)}
                   alt=""
-                  srcset=""
+                  srcSet=""
                 />
                 <label>Password</label>
               </div>
@@ -94,7 +94,7 @@ const ResetPassword = () => {
                   style={{ width: "2rem", marginRight: "1rem" }}
                   src={require(`../../img/lock (1).png`)}
                   alt=""
-                  srcset=""
+                  srcSet=""
                 />
                 <label>Confirm Password</label>
               </div>

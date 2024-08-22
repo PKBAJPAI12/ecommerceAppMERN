@@ -66,7 +66,7 @@ const Login = () => {
                   style={{ width: "2rem", marginRight: "1rem" }}
                   src={require(`../../img/email.png`)}
                   alt=""
-                  srcset=""
+                  srcSet=""
                 />
                 <label>Email Address</label>
               </div>
@@ -91,7 +91,7 @@ const Login = () => {
                   style={{ width: "2rem", marginRight: "1rem" }}
                   src={require(`../../img/lock (1).png`)}
                   alt=""
-                  srcset=""
+                  srcSet=""
                 />
                 <label>Password</label>
               </div>

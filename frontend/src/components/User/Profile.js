@@ -34,7 +34,7 @@ const Profile = () => {
                 style={{ width: "2.5rem", marginRight: "1rem" }}
                 src={require(`../../img/dashboard.png`)}
                 alt=""
-                srcset=""
+                srcSet=""
               />
               <h4 style={{ fontSize: "1.2rem" }}>
                 <Link style={{ textDecoration: "none" }} to="/account">
@@ -47,7 +47,7 @@ const Profile = () => {
                 style={{ width: "2.5rem", marginRight: "1rem" }}
                 src={require(`../../img/orders.png`)}
                 alt=""
-                srcset=""
+                srcSet=""
               />
               <h4 style={{ fontSize: "1.2rem" }}>
                 <Link style={{ textDecoration: "none" }} to="/order">
@@ -60,7 +60,7 @@ const Profile = () => {
                 style={{ width: "2.5rem", marginRight: "1rem" }}
                 src={require(`../../img/product (1).png`)}
                 alt=""
-                srcset=""
+                srcSet=""
               />
               <h4 style={{ fontSize: "1.2rem" }}>
                 <Link style={{ textDecoration: "none" }} to="/cart">
@@ -73,7 +73,7 @@ const Profile = () => {
                 style={{ width: "2.5rem", marginRight: "1rem" }}
                 src={require(`../../img/product (1).png`)}
                 alt=""
-                srcset=""
+                srcSet=""
               />
               <h4 style={{ fontSize: "1.2rem" }}>
                 <Link style={{ textDecoration: "none" }} to="/update/profile">
@@ -88,7 +88,7 @@ const Profile = () => {
 
         <div style={{marginBottom: "1.5rem", display: "flex", justifyContent: "center"}}>
             <h1 style={{marginRight:"1rem", fontSize: "2.2rem", fontStyle: "italic", fontFamily: "cursive"}}>Account Details </h1>
-            <img style={{width: "3rem"}} src={require(`../../img/new images/swirly-scribbled-arrow.png`)} alt="" srcset=""/>
+            <img style={{width: "3rem"}} src={require(`../../img/new images/swirly-scribbled-arrow.png`)} alt="" srcSet=""/>
         </div>
 
         <div className="brandproduct">

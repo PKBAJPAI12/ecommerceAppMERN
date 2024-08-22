@@ -88,7 +88,7 @@ const UpdateProfile = () => {
                 style={{ width: "2.5rem", marginRight: "1rem" }}
                 src={require(`../../img/dashboard.png`)}
                 alt=""
-                srcset=""
+                srcSet=""
               />
               <h4 style={{ fontSize: "1.2rem" }}>
                 <Link style={{ textDecoration: "none" }} to="/account">
@@ -101,7 +101,7 @@ const UpdateProfile = () => {
                 style={{ width: "2.5rem", marginRight: "1rem" }}
                 src={require(`../../img/orders.png`)}
                 alt=""
-                srcset=""
+                srcSet=""
               />
               <h4 style={{ fontSize: "1.2rem" }}>
                 <Link style={{ textDecoration: "none" }} to="/order">
@@ -114,7 +114,7 @@ const UpdateProfile = () => {
                 style={{ width: "2.5rem", marginRight: "1rem" }}
                 src={require(`../../img/product (1).png`)}
                 alt=""
-                srcset=""
+                srcSet=""
               />
               <h4 style={{ fontSize: "1.2rem" }}>
                 <Link style={{ textDecoration: "none" }} to="/cart">
@@ -127,7 +127,7 @@ const UpdateProfile = () => {
                 style={{ width: "2.5rem", marginRight: "1rem" }}
                 src={require(`../../img/product (1).png`)}
                 alt=""
-                srcset=""
+                srcSet=""
               />
               <h4 style={{ fontSize: "1.2rem" }}>
                 <Link style={{ textDecoration: "none" }} to="/update/profile">
