@@ -39,7 +39,7 @@ const Payment = () => {
   const order = {
     shippingInfo,
     orderItems: cartItems,
-    itemsPrice: orderInfo.subtotal,
+    itemPrice: orderInfo.subtotal,
     taxPrice: orderInfo.gst,
     shippingPrice: orderInfo.shippingCharge,
     totalPrice: orderInfo.total,
@@ -94,7 +94,7 @@ const Payment = () => {
               status: result.paymentIntent.status,
             };
 
-            //dispatch(createOrder(order));
+           // dispatch(createOrder(order));
 
             navigate.push("/order-success", { paymentIntentId: result.paymentIntent.id });
           } else {
