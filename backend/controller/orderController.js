@@ -45,7 +45,9 @@ res.status(200).json({
 });
 exports.myOrders=catchAsyncError(async(req,res,next)=>{
     //populate used for get specified data from particular model of mentioned fields
+    console.log('id', req.user._id);
     const orders=await Order.findById({user:req.user._id});
+    console.log('orders', orders);
 res.status(200).json({
     success:true,
     orders,
@@ -54,7 +56,7 @@ res.status(200).json({
 })
 //Admin Routes
 exports.getAllOrders=catchAsyncError(async(req,res,next)=>{
-    const orders=await Order.findById();
+    const orders=await Order.find();
     let totalAmmount=0;
     orders.forEach((order)=>{
         totalAmmount+=order.totalPrice;
