@@ -86,7 +86,7 @@ jobs:
       run: |
         npm cache clean --force
 
-    - name: Install dependencies with legacy peer deps
+    - name: Install dependencies
       run: |
         cd frontend
         npm install
@@ -98,7 +98,6 @@ jobs:
 
     - name: Deploy Frontend to Netlify
       run: |
-        cd frontend
         npm install -g netlify-cli
         netlify deploy --dir=frontend/build --site ${{ secrets.NETLIFY_SITE_ID }} --auth ${{ secrets.NETLIFY_API_TOKEN }}
 
