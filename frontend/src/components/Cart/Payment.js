@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useAlert } from "react-alert";
 import "./Payment.css";
 import { BASE_URL } from "../../helper";
-//import { createOrder, clearErrors } from "../../actions/orderActions";
+import { createOrder, clearErrors } from "../../actions/orderActions";
 import {
   CardNumberElement,
   CardCvcElement,
@@ -94,7 +94,7 @@ const Payment = () => {
               status: result.paymentIntent.status,
             };
 
-           // dispatch(createOrder(order));
+            dispatch(createOrder(order));
 
             navigate.push("/order-success", { paymentIntentId: result.paymentIntent.id });
           } else {

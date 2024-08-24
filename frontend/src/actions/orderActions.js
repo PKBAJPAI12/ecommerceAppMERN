@@ -21,6 +21,7 @@ import {
   } from "../constants/orderConstants";
   
   import axios from "axios";
+  import {BASE_URL} from "../helper";
   
   // Create Order
   export const createOrder = (order) => async (dispatch) => {
@@ -36,7 +37,7 @@ import {
       };
       console.log(`loadtoki ${JSON.stringify(config)}`)
 
-      const { data } = await axios.post("/api/v1/order/new", order, config);
+      const { data } = await axios.post(`${BASE_URL}/api/v1/order/new`, order, config);
       console.log('order yes', data);
   
       dispatch({ type: CREATE_ORDER_SUCCESS, payload: data });
@@ -52,8 +53,17 @@ import {
   export const myOrders = () => async (dispatch) => {
     try {
       dispatch({ type: MY_ORDERS_REQUEST });
+      const token = localStorage.getItem('token');
+      console.log(`toki ${token}`)
+      const config = {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+      };
+      console.log(`loadtoki ${JSON.stringify(config)}`)
   
-      const { data } = await axios.get("/api/v1/orders/me");
+      const { data } = await axios.get(`${BASE_URL}/api/v1/orders/me`, config);
+      console.log('myorder ', data);
   
       dispatch({ type: MY_ORDERS_SUCCESS, payload: data.orders });
     } catch (error) {

@@ -18,6 +18,7 @@ import Cart from "./components/Cart/Cart";
 import Shipping from "./components/Cart/Shipping";
 import Order from "./components/Cart/Order";
 import OrderSuccess from "./components/Cart/OrderSuccess";
+import MyOrders from "./components/Cart/MyOrders";
 import axios from "axios";
 import Payment from "./components/Cart/Payment";
 import { Elements } from "@stripe/react-stripe-js";
@@ -63,6 +64,7 @@ function App() {
         {isAuthenticated && <Route path="/shipping" component={Shipping} />}
         {isAuthenticated && <Route path="/order/confirm" component={Order} />}
         {isAuthenticated && <Route path="/order-success" component={OrderSuccess} />}
+        {isAuthenticated && <Route path="/my-order" component={MyOrders} />}
         {isAuthenticated && stripeApiKey && (
           <Route path="/process/payment" component={() => (
             <Elements stripe={loadStripe(stripeApiKey)}>
