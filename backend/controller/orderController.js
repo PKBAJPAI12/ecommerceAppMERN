@@ -46,9 +46,9 @@ res.status(200).json({
 exports.myOrders=catchAsyncError(async(req,res,next)=>{
     //populate used for get specified data from particular model of mentioned fields
     console.log('id', req.user._id);
-    const orders=await Order.findById({user:req.user._id});
+    const orders=await Order.find({user:req.user._id});
     console.log('orders', orders);
-res.status(200).json({
+    res.status(200).json({
     success:true,
     orders,
   })
