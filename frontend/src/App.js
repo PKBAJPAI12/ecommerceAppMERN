@@ -5,7 +5,7 @@ import Products from "./components/Product/Products";
 import ProductDetails from "./components/Product/ProductDetails";
 import Signup from "./components/User/Signup";
 import Login from "./components/User/Login";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import store from "./store";
 import { loadUser } from './actions/userAction';
 import { useSelector } from "react-redux";
@@ -48,31 +48,31 @@ function App() {
 
   return (
     <Router>
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/products" exact component={Products} />
-        <Route path="/products/:keyword" component={Products} />
-        <Route path="/product/:id" component={ProductDetails} />
-        <Route path="/signup" component={Signup} />
-        <Route path="/login" component={Login} />
-        <Route path="/account" component={Profile} />
-        {isAuthenticated && <Route path="/update/profile" component={UpdateProfile} />}
-        {isAuthenticated && <Route path="/update/password" component={UpdatePassword} />}
-        <Route path="/forget/password" component={ForgetPassword} />
-        <Route path="/password/reset/:token" component={ResetPassword} />
-        <Route path="/cart" component={Cart} />
-        {isAuthenticated && <Route path="/shipping" component={Shipping} />}
-        {isAuthenticated && <Route path="/order/confirm" component={Order} />}
-        {isAuthenticated && <Route path="/order-success" component={OrderSuccess} />}
-        {isAuthenticated && <Route path="/my-order" component={MyOrders} />}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/products/:keyword" element={<Products />} />
+        <Route path="/product/:id" element={<ProductDetails />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/account" element={<Profile />} />
+        {isAuthenticated && <Route path="/update/profile" element={<UpdateProfile />} />}
+        {isAuthenticated && <Route path="/update/password" element={<UpdatePassword />} />}
+        <Route path="/forget/password" element={<ForgetPassword />} />
+        <Route path="/password/reset/:token" element={<ResetPassword />} />
+        <Route path="/cart" element={<Cart />} />
+        {isAuthenticated && <Route path="/shipping" element={<Shipping />} />}
+        {isAuthenticated && <Route path="/order/confirm" element={<Order />} />}
+        {isAuthenticated && <Route path="/order-success" element={<OrderSuccess />} />}
+        {isAuthenticated && <Route path="/my-order" element={<MyOrders />} />}
         {isAuthenticated && stripeApiKey && (
-          <Route path="/process/payment" component={() => (
+          <Route path="/process/payment" element={
             <Elements stripe={loadStripe(stripeApiKey)}>
               <Payment />
             </Elements>
-          )} />
+          } />
         )}
-      </Switch>
+      </Routes>
     </Router>
   );
 }

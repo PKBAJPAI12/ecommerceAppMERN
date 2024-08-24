@@ -2,19 +2,19 @@ import React, { useState, useEffect } from "react";
 import Footer from "../footer";
 import Navbar from "../navbar";
 import MetaData from "../MetaData";
-import PinDropIcon from "@material-ui/icons/PinDrop";
-import HomeIcon from "@material-ui/icons/Home";
-import LocationCityIcon from "@material-ui/icons/LocationCity";
-import PublicIcon from "@material-ui/icons/Public";
-import PhoneIcon from "@material-ui/icons/Phone";
-import TransferWithinAStationIcon from "@material-ui/icons/TransferWithinAStation";
+import PinDropIcon from "@mui/icons-material/PinDrop";
+import HomeIcon from "@mui/icons-material/Home";
+import LocationCityIcon from "@mui/icons-material/LocationCity";
+import PublicIcon from "@mui/icons-material/Public";
+import PhoneIcon from "@mui/icons-material/Phone";
+import TransferWithinAStationIcon from "@mui/icons-material/TransferWithinAStation";
 import CheckoutSteps from "./CheckoutSteps";
 import { useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const Order = () => {
     const { cartItems,shippingInfo } = useSelector((state) => state.cart);
     const { user } = useSelector((state) => state.user);
-    const navigate=useHistory();
+    const navigate=useNavigate();
     const subtotal = cartItems.reduce(
         (sum, item) => sum + item.quantity * item.price,
         0
@@ -36,7 +36,7 @@ const Order = () => {
     
         sessionStorage.setItem("orderInfo", JSON.stringify(data));
     
-        navigate.push("/process/payment");
+        navigate("/process/payment");
       };
   return (
     <>

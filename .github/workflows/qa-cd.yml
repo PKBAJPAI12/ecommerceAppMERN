@@ -89,7 +89,7 @@ jobs:
     - name: Install dependencies with legacy peer deps
       run: |
         cd frontend
-        npm install --legacy-peer-deps --loglevel verbose
+        npm install
 
     - name: Build Frontend
       run: |

@@ -2,17 +2,17 @@ import React, { useState, useEffect } from "react";
 import MetaData from "../MetaData";
 import Navbar from "../navbar";
 import Footer from "../footer";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   forgotPassword,
   loadUser,
   clearErrors,
 } from "../../actions/userAction";
-import { useAlert } from "react-alert";
+import { toast } from "react-toastify";
 const ForgetPassword=()=>{
     const dispatch=useDispatch();
-    const alert=useAlert();
+    
     const { error, message, loading } = useSelector(
         (state) => state.forgotPassword
       );
@@ -28,14 +28,14 @@ const ForgetPassword=()=>{
     
       useEffect(() => {
         if (error) {
-          alert.error(error);
+          toast.error(error);
           dispatch(clearErrors());
         }
     
         if (message) {
-          alert.success(message);
+          toast.success(message);
         }
-      }, [dispatch, error, alert, message]);
+      }, [dispatch, error, message]);
     return (
         <>
       <MetaData title="Ecommerce-Forget Password" />

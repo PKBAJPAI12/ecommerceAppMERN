@@ -1,35 +1,38 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Search from "./Search";
 import store from "../store";
 import { loadUser, logout } from "../actions/userAction";
 import { useSelector, useDispatch } from "react-redux";
-import { useAlert } from "react-alert";
-import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 function Navbar() {
   const dispatch = useDispatch();
-  const navigate = useHistory();
-  const alert = useAlert();
+  const navigate = useNavigate();
   const [showDashboard, setShowDashboard] = useState(false);
   const [isBrandTitle, setIsBrandTitle] = useState(window.innerWidth > 1200);
   const [isBrandLogo, setIsBrandLogo] = useState(window.innerWidth > 1050);
   const [isMobile, setIsMobile] = useState(window.innerWidth > 925);
   const [isOpen, setIsOpen] = useState(false);
   const { isAuthenticated, user } = useSelector((state) => state.user);
+
   function logoutUser() {
     store.dispatch(loadUser()).then(() => {
       dispatch(logout());
       console.log("Logout action dispatched");
-      alert.success("Logout Successfully");
+      toast.success("Logout Successfully");
       console.log("Navigating to login page");
-      navigate.push("/login");
+      navigate("/login");
     });
   }
+
   function toggleDashboard() {
     setShowDashboard(!showDashboard);
   }
+
   useEffect(() => {
-    //store.dispatch(loadUser());
     const handleResize = () => {
       setIsBrandTitle(window.innerWidth > 1200);
       setIsBrandLogo(window.innerWidth > 1050);
@@ -38,11 +41,12 @@ function Navbar() {
 
     window.addEventListener("resize", handleResize);
 
-    // Cleanup the event listener on component unmount
     return () => window.removeEventListener("resize", handleResize);
-  });
+  }, []);
+
   return (
     <>
+      <ToastContainer />
       {isOpen ? (
         <div className="circle7" style={{ top: "14rem" }}></div>
       ) : (
@@ -57,7 +61,6 @@ function Navbar() {
                   style={{ width: "2.5rem" }}
                   src={require(`../img/home (3).png`)}
                   alt=""
-                  srcSet=""
                 />
               </li>
               <li style={{ paddingLeft: "0.1rem" }}>
@@ -85,7 +88,6 @@ function Navbar() {
                     style={{ width: "1rem", height: "1rem", marginTop: "10px" }}
                     src={require(`../img/x.png`)}
                     alt=""
-                    srcSet=""
                   />
                   <ul>
                     <li>
@@ -142,7 +144,6 @@ function Navbar() {
                       style={{ width: "2.5rem", marginLeft: "0.5rem" }}
                       src={require(`../img/logout-arrow.png`)}
                       alt=""
-                      srcSet=""
                     />
                   </li>
                   <li onClick={logoutUser}>
@@ -204,7 +205,7 @@ function Navbar() {
                           <Link to="/account">My Account</Link>{" "}
                         </li>
                         <li>
-                          <Link to="/orders">My Orders</Link>{" "}
+                          <Link to="/my-order">My Orders</Link>{" "}
                         </li>
                         <li>
                           <Link to="/cart">MyCart</Link>{" "}
@@ -220,7 +221,6 @@ function Navbar() {
                       style={{ width: "2.5rem", marginLeft: "0.5rem" }}
                       src={require(`../img/login-arrow.png`)}
                       alt=""
-                      srcSet=""
                     />
                   </li>
                   <li>
@@ -238,4 +238,5 @@ function Navbar() {
     </>
   );
 }
+
 export default Navbar;

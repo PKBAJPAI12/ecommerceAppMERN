@@ -7,14 +7,14 @@ import Footer from "../footer";
 import { Link } from "react-router-dom";
 import { getProduct } from "../../actions/productActions";
 import {useSelector,useDispatch} from "react-redux";
-import { useAlert } from "react-alert";
+import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 import  Pagination from "react-js-pagination";
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import './product.css'
 function Products() {
-  const alert = useAlert();
+  
   const dispatch=useDispatch();
   const [currentPage,setCurrentPage]=useState(1);
   const [price, setPrice] = useState([0, 25000]);
@@ -33,7 +33,7 @@ function Products() {
   useEffect(() => {
     if (error) {
       console.log("error");
-      return alert.error(error);
+      return toast.error(error);
     }
     dispatch(getProduct(keyword,currentPage,price));
   }, [dispatch,keyword,error,currentPage,price]);

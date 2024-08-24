@@ -5,12 +5,12 @@ import Footer from "../footer";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, login } from "../../actions/userAction";
-import { useAlert } from "react-alert";
-import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 const Login = () => {
   const dispatch = useDispatch();
-  const alert = useAlert();
-  const navigate = useHistory();
+  
+  const navigate = useNavigate();
   const [email,setEmail]=useState("");
   const [password,setPassword]=useState("");
   const { error, loading, isAuthenticated,user } = useSelector(
@@ -23,20 +23,20 @@ const Login = () => {
   //const redirect = location.search ? location.search.split("=")[1] : "/account";
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
 
     if (isAuthenticated) {
       if(user.role==="admin"){
-        navigate.push(`/dashboard/admin`);
-        alert.success("Login Successfully")
+        navigate(`/dashboard/admin`);
+        toast.success("Login Successfully")
       }else{
-        navigate.push(`/account`);
-        alert.success("Login Successfully")
+        navigate(`/account`);
+        toast.success("Login Successfully")
       }
     }
-  }, [dispatch, error, alert, navigate, isAuthenticated]);
+  }, [dispatch, error, navigate, isAuthenticated]);
   return (
     <>
       <MetaData title="Ecommerce-Login" />

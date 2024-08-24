@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import MetaData from "../MetaData";
 import Navbar from "../navbar";
 import Footer from "../footer";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   updatePassword,
@@ -10,11 +10,11 @@ import {
   clearErrors,
 } from "../../actions/userAction";
 import { UPDATE_PASSWORD_RESET } from "../../constants/userConstants";
-import { useAlert } from "react-alert";
+import { toast } from "react-toastify";
 const UpdatePassword = () => {
   const dispatch=useDispatch();
-  const alert = useAlert();
-  const navigate=useHistory();
+  
+  const navigate=useNavigate();
   const { error, isUpdated, loading } = useSelector((state) => state.profile);
     const [oldPassword,setOldPassword]=useState("");
     const [newPassword,setNewPassword]=useState("");
@@ -30,20 +30,20 @@ const UpdatePassword = () => {
     
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
 
     if (isUpdated) {
-      alert.success("Password Updated Successfully");
+      toast.success("Password Updated Successfully");
 
-      navigate.push("/account");
+      navigate("/account");
 
       dispatch({
         type: UPDATE_PASSWORD_RESET,
       });
     }
-  }, [dispatch, error, alert, navigate, isUpdated]);
+  }, [dispatch, error, navigate, isUpdated]);
   return (
     <>
       <MetaData title="Ecommerce-Update Password" />

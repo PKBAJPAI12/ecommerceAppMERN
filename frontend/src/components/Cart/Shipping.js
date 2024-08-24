@@ -5,20 +5,20 @@ import MetaData from "../MetaData";
 import CheckoutSteps from "./CheckoutSteps";
 import { useSelector, useDispatch } from "react-redux";
 import { Country, State } from "country-state-city";
-import PinDropIcon from "@material-ui/icons/PinDrop";
-import HomeIcon from "@material-ui/icons/Home";
-import LocationCityIcon from "@material-ui/icons/LocationCity";
-import PublicIcon from "@material-ui/icons/Public";
-import PhoneIcon from "@material-ui/icons/Phone";
-import TransferWithinAStationIcon from "@material-ui/icons/TransferWithinAStation";
-import { useAlert } from "react-alert";
+import PinDropIcon from "@mui/icons-material/PinDrop";
+import HomeIcon from "@mui/icons-material/Home";
+import LocationCityIcon from "@mui/icons-material/LocationCity";
+import PublicIcon from "@mui/icons-material/Public";
+import PhoneIcon from "@mui/icons-material/Phone";
+import TransferWithinAStationIcon from "@mui/icons-material/TransferWithinAStation";
+import { toast } from "react-toastify";
 import {saveShippingInfo} from "../../actions/cartActions"
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const Shipping = () => {
     
   const dispatch = useDispatch();
-  const alert = useAlert();
-  const navigate=useHistory();
+  
+  const navigate=useNavigate();
   const { shippingInfo } = useSelector((state) => state.cart);
 
   const [address, setAddress] = useState(shippingInfo.address);
@@ -31,13 +31,13 @@ const Shipping = () => {
     e.preventDefault();
 
     if (phoneNo.length < 10 || phoneNo.length > 10) {
-      alert.error("Phone Number should be 10 digits Long");
+      toast.error("Phone Number should be 10 digits Long");
       return;
     }
     dispatch(
       saveShippingInfo({ address, city, state, country, pinCode, phoneNo })
     );
-    navigate.push("/order/confirm");
+    navigate("/order/confirm");
   }
 
   return (

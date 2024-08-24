@@ -4,7 +4,7 @@ import Navbar from "../navbar";
 import MetaData from "../MetaData";
 import CheckoutSteps from "./CheckoutSteps";
 import { useSelector, useDispatch } from "react-redux";
-import { useAlert } from "react-alert";
+import { toast } from "react-toastify";
 import "./Payment.css";
 import { BASE_URL } from "../../helper";
 import { createOrder, clearErrors } from "../../actions/orderActions";
@@ -16,21 +16,19 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 const Payment = () => {
   const [cardHolderName, setCardHolderName] = useState("Card Holder Name");
   const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
   const dispatch = useDispatch();
-  const alert = useAlert();
-  //console.log(`stripeApiKey ${stripeApiKey}`);
-  //const stripe = loadStripe(stripeApiKey);
   const stripe = useStripe();
   const elements = useElements();
   const payBtn = useRef(null);
-  const navigate = useHistory();
+  const navigate = useNavigate(); // Updated for v6
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.user);
-  //const { error } = useSelector((state) => state.newOrder);
+  // const { error } = useSelector((state) => state.newOrder);
 
   const paymentData = {
     amount: Math.round(orderInfo.total * 100),
@@ -67,6 +65,7 @@ const Payment = () => {
         const client_secret = data.client_secret;
         console.log(`client_secret ${client_secret}`);
         if (!stripe || !elements) return;
+
         const result = await stripe.confirmCardPayment(client_secret, {
           payment_method: {
             card: elements.getElement(CardNumberElement),
@@ -83,10 +82,10 @@ const Payment = () => {
             },
           },
         });
+
         if (result.error) {
           payBtn.current.disabled = false;
-          console.log(result.error.message);
-          alert.error(result.error.message);
+          toast.error(result.error.message);
         } else {
           if (result.paymentIntent.status === "succeeded") {
             order.paymentInfo = {
@@ -96,29 +95,28 @@ const Payment = () => {
 
             dispatch(createOrder(order));
 
-            navigate.push("/order-success", { paymentIntentId: result.paymentIntent.id });
+            navigate("/order-success", { state: { paymentIntentId: result.paymentIntent.id } });
           } else {
-            alert.error("There's some issue while processing payment ");
+            toast.error("There's some issue while processing payment");
           }
         }
       } else {
-        alert.error("You are not Authenticate User");
-        navigate.push("/login");
+        toast.error("You are not authenticated");
+        navigate("/login");
       }
     } catch (error) {
       payBtn.current.disabled = false;
-      console.log(`err ${error.response.data.message}`);
-
-      alert.error(error.response.data.message);
+      toast.error(error.response?.data?.message || "An error occurred");
     }
   };
 
-  /* useEffect(() => {
-    if (error) {
-      alert.error(error);
-      dispatch(clearErrors());
-    }
-  }, [dispatch, error, alert]);*/
+  // useEffect(() => {
+  //   if (error) {
+  //     toast.error(error);
+  //     dispatch(clearErrors());
+  //   }
+  // }, [dispatch, error]);
+
   const handleCardHolderInput = (e) => {
     setCardHolderName(e.target.value);
   };
@@ -138,7 +136,7 @@ const Payment = () => {
             marginLeft: "auto",
             marginRight: "auto",
             marginTop: "-2rem",
-            paddingtop: "10rem",
+            paddingTop: "10rem",
           }}
           className="formsection"
         >
@@ -148,10 +146,9 @@ const Payment = () => {
             style={{ width: "3rem", padding: "2rem", boxSizing: "content-box" }}
             src={require(`../../img/hand (1).png`)}
             alt=""
-            srcSet=""
           />
 
-          <form style={{ width: "80%" }} onSubmit={(e) => submitHandler(e)}>
+          <form style={{ width: "80%" }} onSubmit={submitHandler}>
             <div className="formrows">
               <div style={{ width: "40%", margin: "auto" }} className="formcol">
                 <div className="formlevel">
@@ -159,7 +156,6 @@ const Payment = () => {
                     style={{ width: "2rem", marginRight: "1rem" }}
                     src={require(`../../img/pin-number.png`)}
                     alt=""
-                    srcSet=""
                   />
                   <label>Card Number</label>
                 </div>
@@ -171,7 +167,6 @@ const Payment = () => {
                     style={{ width: "2rem", marginRight: "1rem" }}
                     src={require(`../../img/user (2).png`)}
                     alt=""
-                    srcSet=""
                   />
                   <label>Card Holder Name</label>
                 </div>
@@ -190,7 +185,6 @@ const Payment = () => {
                     style={{ width: "2rem", marginRight: "1rem" }}
                     src={require(`../../img/cvv.png`)}
                     alt=""
-                    srcSet=""
                   />
                   <label>CVV</label>
                 </div>
@@ -202,7 +196,6 @@ const Payment = () => {
                     style={{ width: "2rem", marginRight: "1rem" }}
                     src={require(`../../img/calendar.png`)}
                     alt=""
-                    srcSet=""
                   />
                   <label>Card Expiry Date</label>
                 </div>

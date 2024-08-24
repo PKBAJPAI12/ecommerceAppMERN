@@ -2,14 +2,14 @@ import React, { useState,useEffect } from "react";
 import MetaData from "../MetaData";
 import Navbar from '../navbar';
 import Footer from "../footer";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useAlert } from "react-alert";
+import { toast } from "react-toastify";
 import { clearErrors, loadUser, register } from "../../actions/userAction";
 const Signup = () => {
   const dispatch = useDispatch();
-  const alert = useAlert();
-  const history = useHistory();
+  
+  const navigate = useNavigate();
   const {isAuthenticated } = useSelector(
     (state) => state.user
   );
@@ -31,8 +31,8 @@ const Signup = () => {
     await dispatch(register(myForm));
     setTimeout(() => {
       if (isAuthenticated) {
-        history.push('/account');
-        alert.success("Login Successfully");
+        navigate('/account');
+        toast.success("Login Successfully");
       }
     }, 8000);
     console.log("done");
@@ -61,10 +61,10 @@ const Signup = () => {
   useEffect(() => {
     console.log("isAuthenticated changed:", isAuthenticated);
     if (isAuthenticated) {
-      history.push('/account');
-      alert.success("Login Successfully");
+      navigate('/account');
+      toast.success("Login Successfully");
     }
-  }, [isAuthenticated, history, alert]);
+  }, [isAuthenticated, navigate]);
   
   console.log('authenticate',isAuthenticated)
   return (
