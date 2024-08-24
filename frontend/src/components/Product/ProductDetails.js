@@ -17,12 +17,12 @@ import {
 } from "../../actions/productActions";
 //import ReviewCard from "./ReviewCard.js";
 import Loader from "../Loader";
-import { useAlert } from "react-alert";
+import { toast } from "react-toastify";
 import MetaData from "../MetaData";
 import { UncontrolledCarousel } from "reactstrap";
 const ProductDetails = () => {
   const dispatch = useDispatch();
-  const alert=useAlert();
+  
   const { product, loading, error } = useSelector(
     (state) => state.productDetail
   );
@@ -45,7 +45,7 @@ const ProductDetails = () => {
   
   const addToCartHandler = () => {
     dispatch(addItemsToCart(id, quantity));
-    alert.success("Item Added To Cart");
+    toast.success("Item Added To Cart");
   };
   useEffect(() => {
     dispatch(getProductDetails(id));

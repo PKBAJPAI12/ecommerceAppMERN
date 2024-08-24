@@ -2,18 +2,18 @@ import React, { useState, useEffect } from "react";
 import MetaData from "../MetaData";
 import Navbar from "../navbar";
 import Footer from "../footer";
-import { Link, useHistory,useParams } from "react-router-dom";
+import { Link, useNavigate,useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   resetPassword,
   loadUser,
   clearErrors,
 } from "../../actions/userAction";
-import { useAlert } from "react-alert";
+import { toast } from "react-toastify";
 const ResetPassword = () => {
   const dispatch=useDispatch();
-  const alert = useAlert();
-  const navigate=useHistory();
+  
+  const navigate=useNavigate();
   const { error, success, loading } = useSelector(
     (state) => state.forgotPassword
   );
@@ -31,16 +31,16 @@ const ResetPassword = () => {
     
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
 
     if (success) {
-      alert.success("Password Updated Successfully");
+      toast.success("Password Updated Successfully");
 
-      navigate.push("/account");
+      navigate("/account");
     }
-  }, [dispatch, error, alert, navigate, success]);
+  }, [dispatch, error, navigate, success]);
   return (
     <>
       <MetaData title="Ecommerce-Update Password" />

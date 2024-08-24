@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Search = ({ isBrandLogo }) => {
-  const navigate = useHistory();
+  const navigate = useNavigate();
   const [keyword, setKeyword] = useState("");
 
   const searchHandler = (e) => {
     e.preventDefault();
     if (keyword.trim()) {
-      navigate.push(`/products/${keyword}`);
+      navigate(`/products/${keyword}`);
     } else {
-      navigate.push(`/products`);
+      navigate(`/products`);
     }
   };
 

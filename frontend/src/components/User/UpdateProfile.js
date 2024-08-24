@@ -2,15 +2,15 @@ import React, { useState, useEffect } from "react";
 import MetaData from "../MetaData";
 import Navbar from "../navbar";
 import Footer from "../footer";
-import { Link,useHistory } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { useSelector,useDispatch } from "react-redux";
 import { updateProfile,loadUser,clearErrors } from "../../actions/userAction";
 import { UPDATE_PROFILE_RESET } from "../../constants/userConstants";
-import { useAlert } from "react-alert";
+import { toast } from "react-toastify";
 const UpdateProfile = () => {
     const dispatch=useDispatch();
-    const navigate=useHistory();
-    const alert = useAlert();
+    const navigate=useNavigate();
+    
   const { user } = useSelector((state) => state.user);
   const { error, isUpdated, loading } = useSelector((state) => state.profile);
     const [name, setName] = useState("");
@@ -42,21 +42,21 @@ const UpdateProfile = () => {
         }
     
         if (error) {
-          alert.error(error);
+          toast.error(error);
           dispatch(clearErrors());
         }
     
         if (isUpdated) {
-          alert.success("Profile Updated Successfully");
+          toast.success("Profile Updated Successfully");
           dispatch(loadUser());
     
-          navigate.push("/account");
+          navigate("/account");
     
           dispatch({
             type: UPDATE_PROFILE_RESET,
           });
         }
-      }, [dispatch, error, alert, navigate, user, isUpdated]);
+      }, [dispatch, error, navigate, user, isUpdated]);
   return (
     <>
       <MetaData title="Ecommerce-Update Profile" />
@@ -104,7 +104,7 @@ const UpdateProfile = () => {
                 srcSet=""
               />
               <h4 style={{ fontSize: "1.2rem" }}>
-                <Link style={{ textDecoration: "none" }} to="/order">
+                <Link style={{ textDecoration: "none" }} to="/my-order">
                   Orders
                 </Link>
               </h4>

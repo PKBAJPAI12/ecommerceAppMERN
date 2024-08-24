@@ -22,7 +22,7 @@ jobs:
           node-version: '18'
 
       - name: Install Dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
 
       - name: Lint code
         run: npm run lint
@@ -53,13 +53,51 @@ jobs:
           api-key: ${{ secrets.RENDER_API_KEY }}
           wait-for-success: true
 
-      - name: Build Frontend
-        run: |
-          cd frontend
-          npm install
-          npm run build
+  build-frontend:
+    needs: deploy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
 
-      - name: Deploy Frontend to Netlify
-        run: |
-          npm install -g netlify-cli
-          netlify deploy --dir=frontend/build --site ${{ secrets.NETLIFY_SITE_ID }} --auth ${{ secrets.NETLIFY_API_TOKEN }}
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Cache Node.js modules
+      uses: actions/cache@v3
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('frontend/package-lock.json') }}-v2
+        restore-keys: |
+          ${{ runner.os }}-node-
+
+    - name: Clean node_modules
+      run: |
+        cd frontend
+        rm -rf node_modules
+
+    - name: Clean npm cache
+      run: |
+        npm cache clean --force
+
+    - name: Install dependencies
+      run: |
+        cd frontend
+        npm install
+
+    - name: Build Frontend
+      run: |
+        cd frontend
+        npm run build
+
+    - name: Deploy Frontend to Netlify
+      run: |
+        npm install -g netlify-cli
+        netlify deploy --dir=frontend/build --site ${{ secrets.NETLIFY_SITE_ID }} --auth ${{ secrets.NETLIFY_API_TOKEN }}
+

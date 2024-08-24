@@ -50,7 +50,7 @@ const Profile = () => {
                 srcSet=""
               />
               <h4 style={{ fontSize: "1.2rem" }}>
-                <Link style={{ textDecoration: "none" }} to="/order">
+                <Link style={{ textDecoration: "none" }} to="/my-order">
                   Orders
                 </Link>
               </h4>
