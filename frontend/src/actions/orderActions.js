@@ -64,8 +64,8 @@ import {
   
       const { data } = await axios.get(`${BASE_URL}/api/v1/orders/me`, config);
       console.log('myorder ', data);
-  
       dispatch({ type: MY_ORDERS_SUCCESS, payload: data.orders });
+      return data.orders;
     } catch (error) {
       dispatch({
         type: MY_ORDERS_FAIL,
