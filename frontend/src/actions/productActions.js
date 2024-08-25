@@ -48,9 +48,14 @@ export const getProductDetails = (id) => async (dispatch) => {
 export const newReview = (reviewData) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_REVIEW_REQUEST });
+    const token = localStorage.getItem('token');
+    console.log(`toki ${token}`)
     const config = {
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        'Authorization': `Bearer ${token}`
+      },
     };
+    console.log(`reviewToken ${JSON.stringify(config)}`)
     const { data } = await axios.put(`${BASE_URL}/api/v1/review`,reviewData,config);
     console.log(`data ${data}`);
     dispatch({

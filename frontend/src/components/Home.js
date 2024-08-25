@@ -66,7 +66,7 @@ function Home() {
             </h5>
           </div>
           <div>
-            <a style={{textDecoration: "none"}} href="Product.jsp">
+            <a style={{textDecoration: "none"}} href="/">
               <input
                 style={{width: "9rem"}}
                 className="newsectionbtn"
@@ -122,7 +122,7 @@ function Home() {
               </h3>
               <a
                 style={{color:"silver", textAlign:"center", marginTop:"0.7rem", fontSize: "0.9rem", textDecoration: "none", listStyle: "none"}}
-                href="Product.jsp?collection=Mens"
+                href="/"
               >
                 Shop Now &#187;
               </a>
@@ -140,7 +140,7 @@ function Home() {
               </h3>
               <a
                 style={{color:"silver",textAlign:"center", marginTop:"0.7rem", fontSize: "0.9rem", textDecoration: "none", listStyle: "none"}}
-                href="Product.jsp?collection=Womens"
+                href="/"
               >
                 Shop Now &#187;
               </a>
@@ -158,7 +158,7 @@ function Home() {
               </h3>
               <a
                 style={{color:"silver", textAlign:"center", marginTop:"0.7rem", fontSize:" 0.9rem", textDecoration: "none", listStyle: "none"}}
-                href="Product.jsp?collection=Kids"
+                href="/"
               >
                 Shop Now &#187;
               </a>

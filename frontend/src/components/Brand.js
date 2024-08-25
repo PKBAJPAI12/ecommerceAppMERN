@@ -14,7 +14,7 @@ function Brand({ element }) {
           <h1>Flat {item.discount}% Off on All Products</h1>
         </div>
         <div>
-          <a style={{ textDecoration: "none" }} href="Product.jsp">
+          <a style={{ textDecoration: "none" }} href="/">
             <input
               className="newsectionbtn"
               style={{ width: "20rem", padding: "0.6rem", borderTopRightRadius: "0rem" }}
