@@ -1,4 +1,3 @@
-
 # E-commerce Application
 
 This project is a fully functional e-commerce application built using the MERN stack, with integrations for payment processing and CI/CD pipelines. The application includes essential features such as user authentication, product management, shopping cart functionality, and secure payments.
